@@ -1,14 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no">
-  <title>SpaceX</title>
-  <link rel="stylesheet" type="text/css" href="styles/reset.css">
-  <link rel="stylesheet" type="text/css" href="styles/style.css">
-</head>
-<body>
-  
-  <script src="scripts/main.js" type="text/javascript"></script>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>SpaceX</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/reset.css">
+    <link rel="stylesheet" type="text/css" href="styles/css/main.css">
+  </head>
+  <body>
+
+    <nav class="navBar">
+      <img class="logo" alt="SpaceX Logo" src="images/whiteLogo.png">
+      <ul>
+        <li><a href="#" title="#">Home</a></li>
+        <li><a href="#" title="#">Story</a></li>
+        <li><a href="#" title="#">BFR</a></li>
+        <li><a href="#" title="#">Stats</a></li>
+      </ul>
+      <div class="social"></div>
+    </nav>
+    <main>
+      <section class="home">
+        <div class="mapContainer">
+          <img src="images/map.png" alt="world map" class="map" width="800" height="500">
+          <canvas class="map" width="800" height="500">
+          </canvas>
+        </div>
+        <div class="textBox mainText active">
+          <p class="instructions">Choose the place of <span class="pinkText">departure</span></p>
+          <button class="deadGradientButton" href="#">Let's Go</button>
+          <a class="buttonLink" href="#"><button class="gradientButton">Let's Go</button></a>
+        </div>
+        <div class="textBox newText">
+          <p class="instructions">Your trip in only <span class="pinkText">30 minutes!</span></p>
+          <a class="buttonLink" href="#Transports"><button class="gradientButton active">Discover</button></a>
+        </div>
+      </section>
+
+      <section class="transports">
+        <div class="transport">
+          <div class="scene">
+            <div class="background">
+              <img src="images/carBackground.svg" alt="nature">
+              <img src="images/carBackground.svg" alt="nature">
+            </div>
+            <img src="images/car.svg" alt="car" class="transportPic">
+            <div class="info">
+              <div class="infoDot"></div>
+              <div class="infoText">
+                <p class="text"></p>
+              </div>
+            </div>
+            <div class="info">
+              <div class="infoDot"></div>
+              <div class="infoText">
+                <p class="text"></p>
+              </div>
+            </div>
+            <div class="info">
+              <div class="infoDot"></div>
+              <div class="infoText">
+                <p class="text"></p>
+              </div>
+            </div>
+          </div>
+          <h3>Car</h3>
+          <div class="mainInfos">
+            <div class="timing">
+              <div class="screen"><span>0</span></div>
+              <div class="screen"><span>0</span></div>
+              <div class="screen"><span class="unit">h</span></div>
+              <div class="screen"><span>0</span></div>
+              <div class="screen"><span>0</span></div>
+              <div class="screen"><span class="unit">min</span></div>
+            </div>
+            <p>de Paris à Shanghai</p>
+            <nav class="transportNav">
+              <ul>
+                <li><a href="#"><span></span></a></li>
+                <li><a href="#"><span></span></a></li>
+                <li><a href="#"><span></span></a></li>
+                <li><a href="#"><span></span></a></li>
+                <li><a href="#"><span></span></a></li>
+                <li><a href="#"><span></span></a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <section class="bfr">
+
+      </section>
+    </main>
+
+
+    <script src="scripts/main.js" type="text/javascript"></script>
+
+    <!--       
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAW9aIRfhPIDbMyJMawk6I93TwrX8ylgrs&callback=initMap">
+</script>
+-->
+  </body>
 </html>

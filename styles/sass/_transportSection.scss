@@ -1,0 +1,160 @@
+section.transports{
+  height: 100vh;
+  background: $purple-blue;
+  position: relative;
+  overflow: hidden;
+
+  h3{
+    position: absolute;
+    top: 80px;
+    height: 60px;
+    width: 100%;
+    text-align: center;
+    font-family: "Roboto";
+    font-size: 40px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  div.scene{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    img.transportPic{
+      display: inline-block;
+      width: 40%;
+      position: absolute;
+      bottom: 35%;
+      left: 50%;
+      transform: translateX(-40%);
+      animation-name: wiggle;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+      animation-fill-mode: forwards;  
+      animation-timing-function: ease-in-out;
+    }
+
+    @keyframes wiggle{
+      0%{transform: translateX(-40%)}
+      50%{transform: translateX(-60%)}
+      100%{transform: translateX(-40%)}
+    }
+
+    div.background{
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      animation-name: slowScroll;
+      animation-duration: 20s;
+      animation-iteration-count: infinite;
+      animation-fill-mode: forwards;  
+      animation-timing-function: linear;
+
+      img:nth-child(1){
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-height: 100%;
+        min-width: 100%;
+      }
+      img:nth-child(2){
+        position: absolute;
+        top: 0;
+        transform: translateX(100%) scaleX(-1);
+        min-height: 100%;
+        min-width: 100%;
+      }
+
+      @keyframes slowScroll{
+        0%{transform: translateX(0)}
+        100%{transform: translateX(-100%)}
+      }
+    }
+  }
+
+  div.mainInfos{
+    position: absolute;
+    bottom: 0;
+    height: 35%;
+    width: 100%;
+    background: $darkPurple;
+
+    div.timing{
+      padding-top: 40px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      align-items: center;
+      margin: auto;
+      font-size: 0;
+
+      div.screen{
+        display: flex;
+        margin: 0 6px;
+        background: #1D1D1D;
+        border: solid black 4px;
+        border-radius: 10px;
+        height: 70px;
+        width: 60px;
+        text-align: center;
+        vertical-align: middle;
+        align-items: center;
+
+        span{
+          display: inline-block;
+          width: 100%;
+          font-size: 30px;
+          font-weight: bold;
+          font-family: Roboto, sans-serif;
+          color: white;
+          text-align: center;
+        }
+
+        span.unit{
+          font-size: 10px;
+        }
+      }
+    }
+
+    p{
+      padding-top: 15px;
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    nav.transportNav{
+      margin-top: 40px;
+      position: relative;
+      height: 30px;
+      width: 100%;
+
+      ul{
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+        li{
+          span{
+            position: relative;
+            display: inline-block;
+            height: 25px;
+            width: 25px;
+            border-radius: 13px;
+            border: solid 2px white;
+          }
+        }
+      }
+
+    }
+  }
+}

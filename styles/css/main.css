@@ -1,0 +1,264 @@
+nav {
+  position: fixed;
+  width: 100%;
+  z-index: 100; }
+  nav img.logo {
+    position: absolute;
+    top: 28px;
+    left: 30px;
+    height: 20px; }
+  nav ul {
+    position: absolute;
+    top: 30px;
+    right: 30px; }
+    nav ul li {
+      display: inline-block;
+      padding: 5px;
+      margin: 0 5px 0 5px; }
+      nav ul li a {
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 18px; }
+
+section.home {
+  height: 100vh;
+  background: linear-gradient(90deg, #3A0063 0.13%, #1B1464 99.86%);
+  position: relative; }
+  section.home div.mapContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 200vh;
+    width: 200vh;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #3A0063 0.13%, #1B1464 99.86%);
+    overflow: hidden;
+    will-change: transform;
+    transition: transform 0.6s ease-in-out, height 0.6s ease-in-out, width 0.6s ease-in-out;
+    box-shadow: 3px 3px 18px rgba(0, 0, 0, 0.3); }
+    section.home div.mapContainer canvas.map, section.home div.mapContainer img.map {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); }
+    section.home div.mapContainer canvas.map.moving, section.home div.mapContainer img.map.moving {
+      animation-name: rotate;
+      animation-duration: 20s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-direction: forwards; }
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%); }
+  100% {
+    transform: translate(-150%, -50%); } }
+  section.home div.mapContainer.active {
+    height: 70vh;
+    width: 70vh;
+    transform: translate(-50%, -50%) scale(0.7); }
+  section.home div.textBox {
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    opacity: 0;
+    will-change: transform, opacity;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    transform: translateY(10px); }
+    section.home div.textBox p {
+      position: absolute;
+      bottom: 80px;
+      width: 100%;
+      text-align: center;
+      font-family: "Roboto";
+      font-size: 40px;
+      font-weight: bold; }
+    section.home div.textBox button {
+      position: absolute;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%); }
+    section.home div.textBox button.gradientButton.active:hover {
+      transform: translateX(-50%) scale(1.2); }
+  section.home div.textBox.active {
+    z-index: 10;
+    opacity: 1;
+    transform: translateY(0); }
+
+section.transports {
+  height: 100vh;
+  background: linear-gradient(90deg, #3A0063 0.13%, #1B1464 99.86%);
+  position: relative;
+  overflow: hidden; }
+  section.transports h3 {
+    position: absolute;
+    top: 80px;
+    height: 60px;
+    width: 100%;
+    text-align: center;
+    font-family: "Roboto";
+    font-size: 40px;
+    font-weight: bold;
+    text-transform: uppercase; }
+  section.transports div.scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+    section.transports div.scene img.transportPic {
+      display: inline-block;
+      width: 40%;
+      position: absolute;
+      bottom: 35%;
+      left: 50%;
+      transform: translateX(-40%);
+      animation-name: wiggle;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+      animation-fill-mode: forwards;
+      animation-timing-function: ease-in-out; }
+@keyframes wiggle {
+  0% {
+    transform: translateX(-40%); }
+  50% {
+    transform: translateX(-60%); }
+  100% {
+    transform: translateX(-40%); } }
+    section.transports div.scene div.background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      animation-name: slowScroll;
+      animation-duration: 20s;
+      animation-iteration-count: infinite;
+      animation-fill-mode: forwards;
+      animation-timing-function: linear; }
+      section.transports div.scene div.background img:nth-child(1) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-height: 100%;
+        min-width: 100%; }
+      section.transports div.scene div.background img:nth-child(2) {
+        position: absolute;
+        top: 0;
+        transform: translateX(100%) scaleX(-1);
+        min-height: 100%;
+        min-width: 100%; }
+@keyframes slowScroll {
+  0% {
+    transform: translateX(0); }
+  100% {
+    transform: translateX(-100%); } }
+  section.transports div.mainInfos {
+    position: absolute;
+    bottom: 0;
+    height: 35%;
+    width: 100%;
+    background: #292136; }
+    section.transports div.mainInfos div.timing {
+      padding-top: 40px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      align-items: center;
+      margin: auto;
+      font-size: 0; }
+      section.transports div.mainInfos div.timing div.screen {
+        display: flex;
+        margin: 0 6px;
+        background: #1D1D1D;
+        border: solid black 4px;
+        border-radius: 10px;
+        height: 70px;
+        width: 60px;
+        text-align: center;
+        vertical-align: middle;
+        align-items: center; }
+        section.transports div.mainInfos div.timing div.screen span {
+          display: inline-block;
+          width: 100%;
+          font-size: 30px;
+          font-weight: bold;
+          font-family: Roboto, sans-serif;
+          color: white;
+          text-align: center; }
+        section.transports div.mainInfos div.timing div.screen span.unit {
+          font-size: 10px; }
+    section.transports div.mainInfos p {
+      padding-top: 15px;
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 18px; }
+    section.transports div.mainInfos nav.transportNav {
+      margin-top: 40px;
+      position: relative;
+      height: 30px;
+      width: 100%; }
+      section.transports div.mainInfos nav.transportNav ul {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: space-between; }
+        section.transports div.mainInfos nav.transportNav ul li span {
+          position: relative;
+          display: inline-block;
+          height: 25px;
+          width: 25px;
+          border-radius: 13px;
+          border: solid 2px white; }
+
+body {
+  overflow: hidden;
+  height: 400vh;
+  background: #292136;
+  font-family: 'Lato', sans-serif;
+  color: #fcfcfc; }
+  body main {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 400vh;
+    will-change: transform;
+    transition: transform 0.6s ease-in-out; }
+
+.pinkText {
+  color: #f11b93; }
+
+button.gradientButton {
+  padding: 5px 15px;
+  height: 26px;
+  background: linear-gradient(90deg, #F11B93 -2.63%, #BF0DD7 69.24%);
+  color: #fcfcfc;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 18px;
+  text-transform: uppercase;
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 0.4s ease, transform 0.4s ease; }
+
+button.deadGradientButton {
+  padding: 5px 15px;
+  height: 26px;
+  background: #7d88a4;
+  color: #fcfcfc;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 18px;
+  text-transform: uppercase;
+  opacity: 1;
+  will-change: opacity;
+  transition: opacity 0.4s ease, transform 0.4s ease; }
+
+button.gradientButton.active {
+  opacity: 1; }
+
+/*# sourceMappingURL=main.css.map */
