@@ -14,11 +14,25 @@ nav {
     nav ul li {
       display: inline-block;
       padding: 5px;
-      margin: 0 5px 0 5px; }
+      margin: 0 5px 0 5px;
+      position: relative; }
       nav ul li a {
         text-decoration: none;
         text-transform: uppercase;
         font-size: 18px; }
+      nav ul li div.activeSection {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: 100%;
+        transform: scaleX(0);
+        background: #fcfcfc;
+        transform-origin: left;
+        transition: transform 0.4s ease-out;
+        will-change: transform; }
+      nav ul li div.activeSection.active {
+        transform: scaleX(0.6); }
 
 section.home {
   height: 100vh;
@@ -29,8 +43,8 @@ section.home {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 200vh;
-    width: 200vh;
+    height: 250vw;
+    width: 250vw;
     border-radius: 50%;
     background: linear-gradient(90deg, #3A0063 0.13%, #1B1464 99.86%);
     overflow: hidden;
@@ -71,7 +85,7 @@ section.home {
       bottom: 80px;
       width: 100%;
       text-align: center;
-      font-family: "Roboto";
+      font-family: 'Roboto', sans-serif;
       font-size: 40px;
       font-weight: bold; }
     section.home div.textBox button {
@@ -91,129 +105,218 @@ section.transports {
   background: linear-gradient(90deg, #3A0063 0.13%, #1B1464 99.86%);
   position: relative;
   overflow: hidden; }
-  section.transports h3 {
-    position: absolute;
-    top: 80px;
-    height: 60px;
-    width: 100%;
-    text-align: center;
-    font-family: "Roboto";
-    font-size: 40px;
-    font-weight: bold;
-    text-transform: uppercase; }
-  section.transports div.scene {
+  section.transports div.sliding {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%; }
-    section.transports div.scene img.transportPic {
+    width: 600vw;
+    height: 100%;
+    font-size: 0;
+    will-change: transform;
+    transition: transform 1.2s ease-out; }
+    section.transports div.sliding div.transport {
+      position: relative;
       display: inline-block;
-      width: 40%;
-      position: absolute;
-      bottom: 35%;
-      left: 50%;
-      transform: translateX(-40%);
-      animation-name: wiggle;
-      animation-duration: 3s;
-      animation-iteration-count: infinite;
-      animation-fill-mode: forwards;
-      animation-timing-function: ease-in-out; }
-@keyframes wiggle {
-  0% {
-    transform: translateX(-40%); }
-  50% {
-    transform: translateX(-60%); }
-  100% {
-    transform: translateX(-40%); } }
-    section.transports div.scene div.background {
+      width: 100vw;
+      height: 100%;
+      overflow: hidden; }
+
+div.transport h3 {
+  position: absolute;
+  top: 80px;
+  height: 60px;
+  width: 100%;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase; }
+div.transport div.scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+  div.transport div.scene div.background {
+    height: 100%;
+    animation-name: slowScroll;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear; }
+    div.transport div.scene div.background img:nth-child(1) {
       position: absolute;
       top: 0;
       left: 0;
-      height: 100%;
-      width: 100%;
-      animation-name: slowScroll;
-      animation-duration: 20s;
-      animation-iteration-count: infinite;
-      animation-fill-mode: forwards;
-      animation-timing-function: linear; }
-      section.transports div.scene div.background img:nth-child(1) {
-        position: absolute;
-        top: 0;
-        left: 0;
-        min-height: 100%;
-        min-width: 100%; }
-      section.transports div.scene div.background img:nth-child(2) {
-        position: absolute;
-        top: 0;
-        transform: translateX(100%) scaleX(-1);
-        min-height: 100%;
-        min-width: 100%; }
+      min-height: 100%;
+      min-width: 100%; }
+    div.transport div.scene div.background img:nth-child(2) {
+      position: absolute;
+      top: 0;
+      transform: translateX(100%);
+      min-height: 100%;
+      min-width: 100%; }
 @keyframes slowScroll {
   0% {
     transform: translateX(0); }
   100% {
     transform: translateX(-100%); } }
-  section.transports div.mainInfos {
+  div.transport div.scene div.transportPic {
     position: absolute;
-    bottom: 0;
-    height: 35%;
-    width: 100%;
-    background: #292136; }
-    section.transports div.mainInfos div.timing {
-      padding-top: 40px;
-      display: flex;
-      justify-content: center;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    transform: translateX(-50%); }
+    div.transport div.scene div.transportPic img {
+      display: inline-block;
       width: 100%;
-      align-items: center;
-      margin: auto;
-      font-size: 0; }
-      section.transports div.mainInfos div.timing div.screen {
-        display: flex;
-        margin: 0 6px;
-        background: #1D1D1D;
-        border: solid black 4px;
-        border-radius: 10px;
-        height: 70px;
-        width: 60px;
-        text-align: center;
-        vertical-align: middle;
-        align-items: center; }
-        section.transports div.mainInfos div.timing div.screen span {
-          display: inline-block;
-          width: 100%;
-          font-size: 30px;
-          font-weight: bold;
-          font-family: Roboto, sans-serif;
-          color: white;
-          text-align: center; }
-        section.transports div.mainInfos div.timing div.screen span.unit {
-          font-size: 10px; }
-    section.transports div.mainInfos p {
-      padding-top: 15px;
-      text-transform: uppercase;
-      text-align: center;
-      font-size: 18px; }
-    section.transports div.mainInfos nav.transportNav {
-      margin-top: 40px;
-      position: relative;
-      height: 30px;
-      width: 100%; }
-      section.transports div.mainInfos nav.transportNav ul {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); }
+    div.transport div.scene div.transportPic div.info {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 0;
+      width: 0; }
+      div.transport div.scene div.transportPic div.info div.infoDot {
         position: absolute;
-        top: 0;
+        height: 22px;
+        width: 22px;
+        background: #f11b93;
+        color: white;
+        border-radius: 10px;
+        text-align: center; }
+        div.transport div.scene div.transportPic div.info div.infoDot img {
+          display: inline-block;
+          height: 22px;
+          width: 22px;
+          will-change: transform;
+          transition: transform 0.4s ease; }
+        div.transport div.scene div.transportPic div.info div.infoDot p {
+          position: absolute;
+          top: 50%;
+          left: 30px;
+          padding: 2px 5px;
+          transform: translate(-20px, -50%);
+          border-left: solid 2px #fcfcfc;
+          opacity: 0;
+          width: 250px;
+          text-align: left;
+          font-size: 16px;
+          font-family: "Lato", sans-serif;
+          color: white;
+          will-change: transform, opacity;
+          transition: transform 0.4s ease, opacity 0.4s ease; }
+      div.transport div.scene div.transportPic div.info div.infoDot:hover p {
+        transform: translate(0, -50%);
+        opacity: 1; }
+
+div.mainInfos {
+  position: absolute;
+  bottom: 0;
+  height: 35%;
+  width: 100%; }
+  div.mainInfos div.timing {
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    margin: auto;
+    font-size: 0; }
+    div.mainInfos div.timing div.screen, div.mainInfos div.timing div.unit {
+      position: relative;
+      margin: 0 6px;
+      background: #0D0D0D;
+      border: solid #615b82 2px;
+      border-radius: 5px;
+      height: 70px;
+      width: 60px;
+      text-align: center;
+      vertical-align: middle;
+      overflow: hidden; }
+      div.mainInfos div.timing div.screen span, div.mainInfos div.timing div.unit span {
+        position: absolute;
+        top: 50%;
         left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        align-items: center;
-        justify-content: space-between; }
-        section.transports div.mainInfos nav.transportNav ul li span {
+        display: inline-block;
+        width: 100%;
+        font-size: 30px;
+        font-weight: bold;
+        font-family: Roboto, sans-serif;
+        color: white;
+        text-align: center;
+        transform: translate(-50%, -50%);
+        will-change: transform;
+        transition: transform 0.4s ease-out; }
+      div.mainInfos div.timing div.screen span.hidden, div.mainInfos div.timing div.unit span.hidden {
+        transform: translate(-50%, 100%); }
+      div.mainInfos div.timing div.screen span.removed, div.mainInfos div.timing div.unit span.removed {
+        transform: translate(-50%, -200%); }
+      div.mainInfos div.timing div.screen span.unit, div.mainInfos div.timing div.unit span.unit {
+        font-size: 10px; }
+  div.mainInfos p {
+    padding-top: 25px;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 18px; }
+  div.mainInfos nav.transportNav {
+    margin-top: 35px;
+    position: relative;
+    height: 30px;
+    width: 100%; }
+    div.mainInfos nav.transportNav ul {
+      border-radius: 3px;
+      height: 6px;
+      background: white;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.3); }
+      div.mainInfos nav.transportNav ul li {
+        margin: 0;
+        padding: 0;
+        height: 20px;
+        width: 20px;
+        font-size: 0; }
+        div.mainInfos nav.transportNav ul li span.dot {
           position: relative;
           display: inline-block;
-          height: 25px;
-          width: 25px;
-          border-radius: 13px;
+          height: 20px;
+          width: 20px;
+          background: #292136;
+          border-radius: 10px;
           border: solid 2px white; }
+          div.mainInfos nav.transportNav ul li span.dot span.activeTransport {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            display: inline-block;
+            height: 10px;
+            width: 10px;
+            background: #fcfcfc;
+            border-radius: 5px;
+            transform: scale(0);
+            will-change: transform;
+            transition: transform 0.3s ease; }
+        div.mainInfos nav.transportNav ul li span.dot:hover span.activeTransport {
+          transform: scale(1); }
+        div.mainInfos nav.transportNav ul li img {
+          position: relative;
+          display: inline-block;
+          height: 20px;
+          width: 20px; }
+        div.mainInfos nav.transportNav ul li img.leftArrow {
+          transform: scaleX(-1); }
+      div.mainInfos nav.transportNav ul li.active span.dot span.activeTransport {
+        transform: scale(1); }
 
 body {
   overflow: hidden;

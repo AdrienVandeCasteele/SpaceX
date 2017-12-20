@@ -1,3 +1,112 @@
+//DATA 
+const dataTransport = {
+  horse: {
+    speed : 100,
+    co2: 0,
+    risk: 10,
+    cost: 1000,
+    facts: ["horse can't swim", "horse are nice friends", "horse can die"],
+  },
+  boat: {
+    speed : 100,
+    co2: 0,
+    risk: 10,
+    cost: 1000,
+    facts: ["horse can't swim"]
+  },
+  train: {
+    speed : 100,
+    co2: 0,
+    risk: 10,
+    cost: 1000,
+    facts: ["horse can't swim"]
+  },
+  car: {
+    speed : 100,
+    co2: 0,
+    risk: 10,
+    cost: 1000,
+    facts: ["horse can't swim"]
+  },
+  plane: {
+    speed : 100,
+    co2: 0,
+    risk: 10,
+    cost: 1000,
+    facts: ["horse can't swim"]
+  },
+  bfr: {
+    speed : 100,
+    co2: 0,
+    risk: 10,
+    cost: 1000,
+    facts: ["horse can't swim"]
+  }
+}
+
+const dataTravel = {
+  paris:{
+    newYork: 5790.41,
+    shanghai: 9265.51,
+    dakar: 4208.83,
+    moscou: 2764.3,
+  },
+  newYork:{
+    paris: 5790.41,
+    shanghai: 11586.20,
+    dakar: 6319.95,
+    moscou: 7372.99,
+  },
+  shanghai:{
+    paris: 9265.51,
+    newYork: 11586.20,
+    dakar: 13288.00,
+    moscou: 6819.27,
+  },
+  dakar:{
+    paris: 4208.83,
+    shanghai: 13288.00,
+    newYork: 6319.95,
+    moscou: 6514.83,
+  },
+  moscou:{
+    paris: 2764.3,
+    shanghai: 6819.27,
+    dakar: 6514.83,
+    newYork: 7372.99,
+  },
+}
+
+// Math functions
+
+const getTiming = (transport, travel)=> {
+
+}
+
+const getDistance = (departure, destination)=>{
+  if(destination == paris){
+    return departure.distance.paris
+  } else if(destination == newYork){
+    return departure.distance.newYork
+  } else if(destination == shanghai){
+    return departure.distance.paris
+  } else if(destination == dakar){
+    return departure.distance.dakar
+  } else if(destination == moscou){
+    return departure.distance.moscou
+  }
+}
+
+const parseTime = (time)=>{
+  time = Math.floor(time*60)
+  let minutes = time%24
+  let hours = Math.floor(time/60)%24
+  let days = Math.floor(time/60/24)
+  return [Math.floor(days/10), days%10, Math.floor(hours/10), hours%10, Math.floor(minutes/10), minutes%10]
+}
+
+//NAV
+
 const $main = document.querySelector("main"),
       $home = $main.querySelector("section.home"),
       $transports = $main.querySelector("section.transports"),
@@ -17,6 +126,13 @@ const goToSection = (section)=>{
   currentSection = section
   console.log(section)
   $main.style.transform=`translateY(${-section*25}%)`
+  updateActiveSection(section)
+}
+
+const updateActiveSection = (section)=>{
+  for(let i=0; i<$sections.length; i++){ $navParts[i].querySelector('.activeSection').classList.remove('active')
+                                       }
+  $navParts[section].querySelector('.activeSection').classList.add('active')
 }
 
 for(let i=0; i<$navParts.length; i++){
@@ -70,7 +186,8 @@ const newYork = {
   textW: 0,
   textH: 30,
   hover: false,
-  selected: false
+  selected: false,
+  distance: dataTravel.newYork,
 },
       paris = {
         x: 383,
@@ -82,7 +199,8 @@ const newYork = {
         textW: 0,
         textH: 30,
         hover: false,
-        selected: false
+        selected: false,
+        distance: dataTravel.paris,
       },
       shanghai = {
         x: 665,
@@ -94,7 +212,8 @@ const newYork = {
         textW: 0,
         textH: 30,
         hover: false,
-        selected: false
+        selected: false,
+        distance: dataTravel.shanghai,
       },
       moscou = {
         x: 470,
@@ -106,7 +225,8 @@ const newYork = {
         textW: 0,
         textH: 30,
         hover: false,
-        selected: false
+        selected: false,
+        distance: dataTravel.moscou,
       },
       dakar = {
         x: 350,
@@ -118,7 +238,8 @@ const newYork = {
         textW: 0,
         textH: 30,
         hover: false,
-        selected: false
+        selected: false,
+        distance: dataTravel.dakar,
       }
 
 const destinations= [newYork, paris, shanghai, moscou, dakar]
@@ -269,6 +390,8 @@ InstructionLink.addEventListener('click', (e)=>{
     startCanvas()
     updateNewText()
     changeMainText()
+    updateTransportText()
+    updateTransportTiming(transportsParts[0])
   }
 })
 
@@ -294,7 +417,7 @@ const displayEarth = ()=>{
 }
 
 const updateNewText = ()=>{
-  $newTextTitle.innerHTML=`De ${activeDestinations[0].text} à ${activeDestinations[1].text} en <span class="pinkText">30min!</span>`
+  $newTextTitle.innerHTML=`From ${activeDestinations[0].text} to ${activeDestinations[1].text} in about <span class="pinkText">30min!</span>`
 }
 
 const changeMainText = ()=>{
@@ -306,6 +429,117 @@ $newTextLink.addEventListener('click', (e)=>{
   e.preventDefault()
   goToSection(1)
 })
+
+
+// TRANSPORT SECTION
+
+//transport nav
+
+const $transportNav = $transports.querySelector('nav'),
+      $transportNavParts = Array.from($transportNav.querySelectorAll('li')),
+      transportsParts = [dataTransport.horse, dataTransport.boat, dataTransport.train, dataTransport.car, dataTransport.plane, dataTransport.bfr],
+      $sliding = $transports.querySelector('.sliding')
+
+// init Transport functions
+
+const updateTransportDot = (transport)=>{
+  const $infoDots = transport.DOM.querySelectorAll('.infoDot')
+  for(let i=0; i<$infoDots.length; i++){
+    $infoDots[i].querySelector('p').textContent=transport.facts[i]
+    const coords = $infoDots[i].dataset.coords.split(" ")
+   console.log(coords) 
+   $infoDots[i].style.transform=`translate(${coords[0]*transport.DOM.offsetWidth}px, ${coords[1]*transport.DOM.offsetWidth}px)`
+  }
+}
+
+for(let i=0; i<transportsParts.length; i++){
+  transportsParts[i].DOM=$transports.querySelectorAll(".transportPic")[i]
+  updateTransportDot(transportsParts[i])
+}
+
+let currentTransport = 0
+
+for(let i=0; i<$transportNavParts.length; i++){
+  console.log('for')
+  if(i==0){
+    $transportNavParts[i].addEventListener('click', ()=>{
+      if(currentTransport>1){
+        goToTransport(currentTransport-1)
+      } else{
+        goToTransport(5)
+      }
+    })
+  } else if(i==7){
+    $transportNavParts[i].addEventListener('click', ()=>{
+      if(currentTransport<5){
+        goToTransport(currentTransport+1)
+      } else{
+        goToSection(2)
+      }
+    })
+
+  }else{
+    console.log(i)
+    $transportNavParts[i].addEventListener('click', ()=>{
+      goToTransport(i-1)
+    })
+  }
+}
+
+const goToTransport = (index)=>{
+  currentTransport=index
+  $sliding.style.transform=`translateX(${-index*100/6}%)`
+  updateActiveTransport(index+1)
+  updateTransportTiming(transportsParts[index])
+}
+
+const updateActiveTransport = (index)=>{
+  for(let i=0; i<$transportNavParts.length; i++){
+    $transportNavParts[i].classList.remove("active")
+  }
+  $transportNavParts[index].classList.add("active")
+}
+
+//update transport Infos
+
+const $mainInfos = $transports.querySelector('div.mainInfos'),
+      $places = $mainInfos.querySelector('p'),
+      $timing = $mainInfos.querySelector('div.timing'),
+      $screens = Array.from($timing.querySelectorAll('div.screen'))
+
+
+const updateTransportTiming = (transport)=>{
+  const distance = getDistance(activeDestinations[0], activeDestinations[1])
+  const time = parseTime(distance/transport.speed)
+  for(let i=0; i<$screens.length; i++){
+    const $newText= document.createElement('span'),
+          $oldText= $screens[i].querySelector('span')
+    $newText.innerHTML=time[i]
+    $newText.classList.add("hidden")
+    $screens[i].appendChild($newText)
+    window.setTimeout(()=>{
+      $oldText.classList.add("removed")
+      $newText.classList.remove("hidden")
+      window.setTimeout(()=>{
+        $oldText.remove()
+      },
+                        400)
+    },
+                      i*100)
+  }
+}
+
+const updateTransportText = ()=>{
+  $places.textContent=`From ${activeDestinations[0].text} to ${activeDestinations[1].text}`
+}
+
+
+
+
+
+
+
+
 
 
 

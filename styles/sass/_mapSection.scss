@@ -8,8 +8,8 @@ section.home{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 200vh;
-    width: 200vh;
+    height: 250vw;
+    width: 250vw;
     border-radius: 50%;
     background: $purple-blue;
     overflow: hidden;
@@ -53,13 +53,13 @@ section.home{
     will-change: transform, opacity;
     transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
     transform: translateY(10px);
-    
+
     p{
       position: absolute;
       bottom: 80px;
       width: 100%;
       text-align: center;
-      font-family: "Roboto";
+      font-family: 'Roboto', sans-serif;
       font-size: 40px;
       font-weight: bold;
     }
@@ -75,7 +75,7 @@ section.home{
       transform: translateX(-50%) scale(1.2)
     }
   }
-  
+
   div.textBox.active{
     z-index: 10;
     opacity: 1;

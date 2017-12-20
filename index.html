@@ -13,10 +13,10 @@
     <nav class="navBar">
       <img class="logo" alt="SpaceX Logo" src="images/whiteLogo.png">
       <ul>
-        <li><a href="#" title="#">Home</a></li>
-        <li><a href="#" title="#">Story</a></li>
-        <li><a href="#" title="#">BFR</a></li>
-        <li><a href="#" title="#">Stats</a></li>
+        <li><a href="#" title="#">Home</a><div class="activeSection"></div></li>
+        <li><a href="#" title="#">Story</a><div class="activeSection"></div></li>
+        <li><a href="#" title="#">BFR</a><div class="activeSection"></div></li>
+        <li><a href="#" title="#">Stats</a><div class="activeSection"></div></li>
       </ul>
       <div class="social"></div>
     </nav>
@@ -39,54 +39,193 @@
       </section>
 
       <section class="transports">
-        <div class="transport">
-          <div class="scene">
-            <div class="background">
-              <img src="images/carBackground.svg" alt="nature">
-              <img src="images/carBackground.svg" alt="nature">
-            </div>
-            <img src="images/car.svg" alt="car" class="transportPic">
-            <div class="info">
-              <div class="infoDot"></div>
-              <div class="infoText">
-                <p class="text"></p>
+        <div class="sliding">
+          <div class="transport">
+            <div class="scene">
+              <div class="background">
+                <img src="images/carBackground.svg" alt="nature">
+                <img src="images/carBackground.svg" alt="nature">
+              </div>
+              <div class="transportPic">
+                <img src="images/car.svg" alt="car">
+                <div class="info">
+                  <div class="infoDot" data-coords="0.288 0.056">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
+                  <div class="infoDot" data-coords="-0.40 -0.05">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
+                  <div class="infoDot" data-coords="0 -0.10">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="info">
-              <div class="infoDot"></div>
-              <div class="infoText">
-                <p class="text"></p>
-              </div>
-            </div>
-            <div class="info">
-              <div class="infoDot"></div>
-              <div class="infoText">
-                <p class="text"></p>
-              </div>
-            </div>
+            <h3>Car</h3>
           </div>
-          <h3>Car</h3>
-          <div class="mainInfos">
-            <div class="timing">
-              <div class="screen"><span>0</span></div>
-              <div class="screen"><span>0</span></div>
-              <div class="screen"><span class="unit">h</span></div>
-              <div class="screen"><span>0</span></div>
-              <div class="screen"><span>0</span></div>
-              <div class="screen"><span class="unit">min</span></div>
+          <div class="transport">
+            <div class="scene">
+              <div class="background">
+                <img src="images/carBackground.svg" alt="nature">
+                <img src="images/carBackground.svg" alt="nature">
+              </div>
+              <img src="images/plane.svg" alt="car" class="transportPic">
+              <div class="info">
+                <div class="infoDot">
+                  <p class="text"></p>
+                </div>
+                <div class="infoDot">
+                  <p class="text"></p>
+                </div>
+                <div class="infoDot">
+                  <p class="text"></p>
+                </div>
+              </div>
             </div>
-            <p>de Paris à Shanghai</p>
-            <nav class="transportNav">
-              <ul>
-                <li><a href="#"><span></span></a></li>
-                <li><a href="#"><span></span></a></li>
-                <li><a href="#"><span></span></a></li>
-                <li><a href="#"><span></span></a></li>
-                <li><a href="#"><span></span></a></li>
-                <li><a href="#"><span></span></a></li>
-              </ul>
-            </nav>
+            <h3>Car</h3>
+
           </div>
+          <div class="transport">
+            <div class="scene">
+              <div class="background">
+                <img src="images/carBackground.svg" alt="nature">
+                <img src="images/carBackground.svg" alt="nature">
+              </div>
+              <img src="images/car.svg" alt="car" class="transportPic">
+              <div class="info">
+                <div class="infoDot"></div>
+                <div class="infoText">
+                  <p class="text"></p>
+                </div>
+              </div>
+              <div class="info">
+                <div class="infoDot"></div>
+                <div class="infoText">
+                  <p class="text"></p>
+                </div>
+              </div>
+              <div class="info">
+                <div class="infoDot"></div>
+                <div class="infoText">
+                  <p class="text"></p>
+                </div>
+              </div>
+            </div>
+            <h3>Car</h3>
+          </div>
+          <div class="transport">
+            <div class="scene">
+              <div class="background">
+                <img src="images/carBackground.svg" alt="nature">
+                <img src="images/carBackground.svg" alt="nature">
+              </div>
+              <img src="images/car.svg" alt="car" class="transportPic">
+              <div class="info">
+                <div class="infoDot"></div>
+                <div class="infoText">
+                  <p class="text"></p>
+                </div>
+              </div>
+              <div class="info">
+                <div class="infoDot"></div>
+                <div class="infoText">
+                  <p class="text"></p>
+                </div>
+              </div>
+              <div class="info">
+                <div class="infoDot"></div>
+                <div class="infoText">
+                  <p class="text"></p>
+                </div>
+              </div>
+            </div>
+            <h3>Car</h3>
+          </div>
+          <div class="transport">
+            <div class="scene">
+              <div class="background">
+                <img src="images/carBackground.svg" alt="nature">
+                <img src="images/carBackground.svg" alt="nature">
+              </div>
+              <img src="images/car.svg" alt="car" class="transportPic">
+              <div class="info">
+                <div class="infoDot"></div>
+                <div class="infoText">
+                  <p class="text"></p>
+                </div>
+              </div>
+              <div class="info">
+                <div class="infoDot"></div>
+                <div class="infoText">
+                  <p class="text"></p>
+                </div>
+              </div>
+              <div class="info">
+                <div class="infoDot"></div>
+                <div class="infoText">
+                  <p class="text"></p>
+                </div>
+              </div>
+            </div>
+            <h3>Car</h3>
+          </div>
+          <div class="transport">
+            <div class="scene">
+              <div class="background">
+                <img src="images/carBackground.svg" alt="nature">
+                <img src="images/carBackground.svg" alt="nature">
+              </div>
+              <img src="images/car.svg" alt="car" class="transportPic">
+              <div class="info">
+                <div class="infoDot"></div>
+                <div class="infoText">
+                  <p class="text"></p>
+                </div>
+              </div>
+              <div class="info">
+                <div class="infoDot"></div>
+                <div class="infoText">
+                  <p class="text"></p>
+                </div>
+              </div>
+              <div class="info">
+                <div class="infoDot"></div>
+                <div class="infoText">
+                  <p class="text"></p>
+                </div>
+              </div>
+            </div>
+            <h3>Car</h3>
+          </div>
+        </div>
+        <div class="mainInfos">
+          <div class="timing">
+            <div class="screen"><span>0</span></div>
+            <div class="screen"><span>0</span></div>
+            <div class="unit"><span class="unit">days</span></div>
+            <div class="screen"><span>0</span></div>
+            <div class="screen"><span>0</span></div>
+            <div class="unit"><span class="unit">h</span></div>
+            <div class="screen"><span>0</span></div>
+            <div class="screen"><span>0</span></div>
+            <div class="unit"><span class="unit">min</span></div>
+          </div>
+          <p>from Paris to Shanghai</p>
+          <nav class="transportNav">
+            <ul>
+              <li><a href="#"><img class="leftArrow" src="images/arrow.svg" alt="Go Left"></a></li>
+              <li class="active"><a href="#"><span class="dot"><span class="activeTransport"></span></span></a></li>
+              <li><a href="#"><span class="dot"><span class="activeTransport"></span></span></a></li>
+              <li><a href="#"><span class="dot"><span class="activeTransport"></span></span></a></li>
+              <li><a href="#"><span class="dot"><span class="activeTransport"></span></span></a></li>
+              <li><a href="#"><span class="dot"><span class="activeTransport"></span></span></a></li>
+              <li><a href="#"><span class="dot"><span class="activeTransport"></span></span></a></li>
+              <li><a href="#"><img class="rightArrow"  src="images/arrow.svg" alt="Go Right"></a></li>
+            </ul>
+          </nav>
         </div>
       </section>
 

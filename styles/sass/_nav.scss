@@ -19,11 +19,29 @@ nav{
       display: inline-block;
       padding: 5px;
       margin: 0 5px 0 5px;
+      position: relative;
 
       a{
         text-decoration: none;
         text-transform: uppercase;
         font-size: 18px;
+      }
+
+      div.activeSection{
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: 100%;
+        transform: scaleX(0);
+        background: $white;
+        transform-origin: left;
+        transition: transform 0.4s ease-out;
+        will-change: transform;
+      }
+      
+      div.activeSection.active{
+        transform: scaleX(0.6);
       }
     }
   }
