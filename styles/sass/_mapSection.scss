@@ -19,6 +19,7 @@ section.home{
     box-shadow: 3px 3px 18px rgba(0,0,0,0.3);
 
     canvas.map, img.map{
+      z-index: 10;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -38,12 +39,44 @@ section.home{
       0%{transform: translate(-50%, -50%)}
       100%{transform: translate(-150%, -50%)}
     }
+    
+    div.reset{
+      cursor: pointer;
+      position: relative;
+      z-index: 200;
+      display: none;
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      transform: rotate(180deg);
+      will-change: opacity, transform;
+      transition: opcaity 0.4s ease-out, transform 0.6s cubic-bezier(0.12, 0.42, 0.14, 0.99);
+      
+      img.reset{
+        position: absolute;
+        top: 15%;
+        left: 15%;
+        height: 70%;
+        width: 70%;
+      }
+    }
   }
 
   div.mapContainer.active{
     height: 70vh;
     width: 70vh;
     transform: translate(-50%, -50%) scale(0.7);
+    
+    div.reset{
+      display: block;
+    }
+  }
+  
+  div.mapContainer.active:hover{
+    div.reset{
+      opacity: 1;
+      transform: rotate(0);
+    }
   }
 
   div.textBox{
@@ -71,10 +104,6 @@ section.home{
       left: 50%;
       bottom: 30px;
       transform: translateX(-50%);
-    }
-
-    button.gradientButton.active:hover{
-      transform: translateX(-50%) scale(1.2)
     }
   }
 

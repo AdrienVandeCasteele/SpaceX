@@ -33,7 +33,7 @@ const dataTransport = {
     co2: 0,
     risk: 10,
     cost: 1000,
-    facts: ["The car offers great accessibility. As a result, it can be used all the time and in all circumstances", "The plane is a means of transport more and more used in the world. It is undoubtedly the most secure and controlled means of transport."]
+    facts: ["The car offers great accessibility. As a result, it can be used all the time and in all circumstances", "The plane is a means of transport more and more used in the world.", "It is undoubtedly the most secure and controlled means of transport."]
   },
   bfr: {
     speed : 16000,
@@ -144,7 +144,7 @@ const getTimeStats = (transport)=>{
 const $main = document.querySelector("main"),
       $home = $main.querySelector("section.home"),
       $transports = $main.querySelector("section.transports"),
-      $bfr = $main.querySelector("section.bfr"),
+      $bfr = $main.querySelector("section.bfrPage"),
       $stats = $main.querySelector("section.stats"),
       $sections = [$home, $transports, $bfr, $stats],
       $navBar = document.querySelector('nav.navBar'),
@@ -407,7 +407,8 @@ const $textBox = $home.querySelector('div.mainText'),
       $newTextLink = $newTextBox.querySelector('.buttonLink'),
       $titleBox = $home.querySelector('div.titleBox'),
       $titleTrip = $titleBox.querySelector('p.trip'),
-      $titleDistance = $titleBox.querySelector('p.distance')
+      $titleDistance = $titleBox.querySelector('p.distance'),
+      $reset = $home.querySelector('div.reset')
 
 $newTextBox.classList.remove("active")
 $home.appendChild($newTextBox)
@@ -456,6 +457,14 @@ InstructionLink.addEventListener('click', (e)=>{
   }
 })
 
+
+$reset.addEventListener('click', ()=>{
+  displayEarth()
+  stopCanvas()
+  changeMainText()
+})
+
+
 const earth = $home.querySelector("div.mapContainer"),
       cloneCanvas = map.cloneNode(true),
       cloneBackground = mapBackground.cloneNode(true),
@@ -473,8 +482,15 @@ const startCanvas = ()=>{
   cloneCanvas.classList.add("moving")
 }
 
+const stopCanvas = ()=>{
+  cloneBackground.remove()
+  cloneCanvas.remove()
+  mapBackground.classList.remove('moving')
+  map.classList.remove('moving')
+}
+
 const displayEarth = ()=>{
-  earth.classList.add("active")
+  earth.classList.toggle("active")
 }
 
 const updateNewText = ()=>{
@@ -483,9 +499,9 @@ const updateNewText = ()=>{
 }
 
 const changeMainText = ()=>{
-  $textBox.classList.remove('active')
-  $newTextBox.classList.add('active')
-  $titleBox.classList.add('active')
+  $textBox.classList.toggle('active')
+  $newTextBox.classList.toggle('active')
+  $titleBox.classList.toggle('active')
 }
 
 $newTextLink.addEventListener('click', (e)=>{
@@ -572,22 +588,32 @@ const $mainInfos = $transports.querySelector('div.mainInfos'),
       $screens = Array.from($timing.querySelectorAll('div.screen')),
       $speedJauge = $transports.querySelector('div.fillJauge')
 
+let updatingTime = false
 
 const updateTransportTiming = (transport)=>{
-  const time = parseTime(getTime(transport))
-  for(let i=0; i<$screens.length; i++){
-    const $newText= document.createElement('span'),
-          $oldText= $screens[i].querySelector('span')
-    $newText.innerHTML=time[i]
-    $newText.classList.add("hidden")
-    $screens[i].appendChild($newText)
-    window.setTimeout(()=>{
-      $oldText.classList.add("removed")
-      $newText.classList.remove("hidden")
+  console.log(updatingTime)
+  if(!updatingTime){
+    updatingTime=true
+    const time = parseTime(getTime(transport))
+    for(let i=0; i<$screens.length; i++){
+      const $newText= document.createElement('span'),
+            $oldText= $screens[i].querySelector('span')
+      $newText.innerHTML=time[i]
+      $newText.classList.add("hidden")
+      $screens[i].appendChild($newText)
       window.setTimeout(()=>{
-        $oldText.remove()
-      },400)
-    },i*100)
+        $oldText.classList.add("removed")
+        $newText.classList.remove("hidden")
+        window.setTimeout(()=>{
+          $oldText.remove()
+          if(i==$screens.length-1){
+            updatingTime=false
+          }
+        },400)
+      },i*100)
+    }
+  } else{
+    window.setTimeout(()=>{updateTransportTiming(transport)}, 400)
   }
 }
 
@@ -654,40 +680,11 @@ createParticle()
 
 moveParticle()
 
+//BFR SECTION
 
+const $bfrButton = $bfr.querySelector('.gradientButton')
 
-// MORE
-const $infoFirst = $main.querySelector(".info-1"),
-      $infoTextFirst = $main.querySelector(".infoText-1"),
-      $infoSecond = $main.querySelector(".info-2"),
-      $infoTextSecond = $main.querySelector(".infoText-2"),
-      $infoThree = $main.querySelector(".info-3"),
-      $infoTextThree = $main.querySelector(".infoText-3"),
-      $infoLast = $main.querySelector(".info-4"),
-      $infoTextLast = $main.querySelector(".infoText-4")
-
-
-$infoFirst.addEventListener('click', (event) => {
-  event.preventDefault(); 
-  $infoTextFirst.classList.toggle('open')
-  $infoFirst.classList.toggle('moreHover')
-
-})
-
-$infoSecond.addEventListener('click', () => {
-  $infoTextSecond.classList.toggle('open')
-  $infoSecond.classList.toggle('moreHover')
-})
-
-$infoThree.addEventListener('click', () => {
-  $infoTextThree.classList.toggle('open')
-  $infoThree.classList.toggle('moreHover')
-})
-
-$infoLast.addEventListener('click', () => {
-  $infoTextLast.classList.toggle('open')
-  $infoLast.classList.toggle('moreHover')
-})
+$bfrButton.addEventListener('click', ()=>{goToSection(3)})
 
 // UPDATE STATS
 

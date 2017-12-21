@@ -68,6 +68,11 @@ button.gradientButton{
   opacity: 0;
   will-change: opacity;
   transition: opacity 0.4s ease, transform 0.4s ease;
+  cursor: pointer;
+}
+
+button.gradientButton.active:hover{
+  transform: translateX(-50%) scale(1.2)
 }
 
 button.deadGradientButton{
@@ -86,4 +91,72 @@ button.deadGradientButton{
 
 button.gradientButton.active{
   opacity: 1;
+}
+
+div.info{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 0;
+  width: 0;
+
+  div.infoDot{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    height: 0px;
+    width: 250px;
+    font-size: 0;
+
+    div.dot{
+      position: relative;
+      display: inline-block;
+      height: 22px;
+      width: 22px;
+      border-radius: 11px;
+      background: $pink-alpha;
+      transform: translate(2px, 2px);
+
+      img.dot{
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        display: inline-block;
+        height: 22px;
+        width: 22px;
+        will-change: transform;
+        transition: transform 0.4s ease;
+      }
+    }
+
+    p{
+      display: inline-block;
+      padding: 5px;
+      margin-left: 10px;
+      max-width: 228px;
+      background: $heavyPurple;
+      text-align: left;
+      font-size: 16px;
+      font-family: "Lato", sans-serif;
+      color: white;
+      opacity: 0;
+      transform: translateX(-10px);
+      will-change: transform, opacity;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+
+    }
+  }
+
+  div.infoDot:hover{
+
+    img.dot{
+      transform: rotate(90deg);
+    }
+
+    p{
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
 }

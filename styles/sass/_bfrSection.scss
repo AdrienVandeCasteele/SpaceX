@@ -22,7 +22,29 @@ section.bfrPage{
     position:absolute;
     top:20%;
     left:20%;
-    width:45%;
+    width:220px;
+
+    .info{
+      z-index: 100;
+      height: 100%;
+
+      .infoDot{
+        left: 50%;
+        transform: translateX(-11px);
+      }
+      .infoDot:nth-child(1){
+        top: 20%
+      }
+      .infoDot:nth-child(2){
+        top: 40%
+      }
+      .infoDot:nth-child(3){
+        top: 60%
+      }
+      .infoDot:nth-child(4){
+        top: 80%
+      }
+    }
 
     img
     {
@@ -35,105 +57,13 @@ section.bfrPage{
       font-size:17px;
       transform:translateY(20px);
     }
-    .scrollText
-    {
-      .more
-      {
-        position:absolute;
-        width:30px;
-        height:30px;
-        background-color:$pink;
-        color:$white;
-        border-radius:50%;
-        cursor:pointer;
-        transition-duration:0.5s;
-      }
-
-      .moreHover
-      {
-        position:absolute;
-        width:30px;
-        height:30px;
-        background-color:$white;
-        color:$pink;
-        border-radius:50%;
-        cursor:pointer;
-        transform:rotate(45deg);
-      }
-
-      .info-1
-      {
-        top:10%;
-        left:10%;
-      }
-
-      .info-2
-      {
-        top:50%;
-        left:8%;
-      }
-
-      .info-3
-      {
-        top:70%;
-        left:20%;
-      }
-
-      .info-4
-      {
-        top:90%;
-        left:8%;
-      }
-
-      .textHidden
-      {
-        position:absolute;
-        padding:10px;
-        background-color:$heavyPurple;
-        opacity:0;
-        transform: translateX(-5px);
-        transition-duration: 0.5s;
-        will-change: transform, opacity;
-
-        h6,p
-        {
-          font-size:13px;
-          text-align:center;
-          line-height:15px;
-        }
-      }
-
-      .textHidden.open{
-
-        opacity:1;
-        transform:translateX(0px);
-      }
-
-      .infoText-1
-      {
-        top:4%;
-        left:16%;
-      }
-      .infoText-2
-      {
-        top:42%;
-        left:10%;
-      }
-      .infoText-3
-      {
-        top:62%;
-        left:15%;
-      }
-      .infoText-4
-      {
-        top:82%;
-        left:10%;
-      }
-    }
   }
+
   .bfrDocumentation
   {
     position:absolute;
+    display: flex;
+    justify-content: center;
     top:30%;
     right:1%;
     width:55%;
@@ -171,35 +101,12 @@ section.bfrPage{
     {
       margin-bottom:20px;
     }
-    .buttonMore
-    {
-      padding:13px;
-      width:210px;
-      height:45px;
-      text-align:center;
-      background:$pink-purple;
-      transform:translateX(60%) translateY(60%);
-      transition-duration:0.90s;
-      cursor:pointer;
+  }
 
-      p
-      { 
-        font-family:'Roboto', sans-serif;
-        font-size:13px;
-        font-weight:300;
-      }
-
-      a
-      {
-        text-decoration:none;
-      }
-
-    }
-    .buttonMore:hover
-    {
-      background-color:$purple-pink;
-      opacity:0.8;
-      transform:translateX(60%) translateY(50%) scale(1.1)
-    }
+  .gradientButton{
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
   }
 }
