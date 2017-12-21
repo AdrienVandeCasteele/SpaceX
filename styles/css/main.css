@@ -1,3 +1,78 @@
+.share {
+  position: fixed;
+  left: 30px;
+  bottom: 20px;
+  margin: 0px;
+  width: 200px;
+  height: 50px;
+  z-index: 1; }
+  .share .socialShare {
+    display: block;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    transition: transform 0.5s cubic-bezier(0.8, 0.04, 0.58, 1), opacity 0.5s cubic-bezier(0.8, 0.04, 0.58, 1);
+    will-change: transform,opacity; }
+  .share .trigger {
+    z-index: 20; }
+  .share .icon {
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    transition: transform 0.15s ease-in-out;
+    will-change: transform; }
+
+.share:hover .socialShare.facebook {
+  opacity: 1;
+  transform: translateX(110%); }
+
+.share:hover .socialShare.twitter {
+  opacity: 1;
+  transform: translateX(220%); }
+
+.share:hover .socialShare.instagram {
+  opacity: 1;
+  transform: translateX(330%); }
+
+.share:hover .socialShare.youtube {
+  opacity: 1;
+  transform: translateX(440%); }
+
+.share:hover .socialShare.flickr {
+  opacity: 1;
+  transform: translateX(550%); }
+
+.share:hover .socialShare.trigger {
+  transform: rotate(-70deg); }
+
+.share.socialShare.facebook {
+  opacity: 0;
+  transition-delay: 0.00s; }
+
+.share.socialShare.twitter {
+  opacity: 0;
+  transition-delay: 0.05s; }
+
+.share.socialShare.instagram {
+  opacity: 0;
+  transition-delay: 0.10s; }
+
+.share.socialShare.youtube {
+  opacity: 0;
+  transition-delay: 0.15s; }
+
+.share.socialShare.flickr {
+  opacity: 0;
+  transition-delay: 0.20s; }
+
+.share .socialShare:not(.trigger):hover.icon {
+  top: 2px; }
+
 nav {
   position: fixed;
   width: 100%;
@@ -37,7 +112,8 @@ nav {
 section.home {
   height: 100vh;
   background: linear-gradient(90deg, #3A0063 0.13%, #1B1464 99.86%);
-  position: relative; }
+  position: relative;
+  overflow: hidden; }
   section.home div.mapContainer {
     position: absolute;
     top: 50%;
@@ -55,7 +131,8 @@ section.home {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%); }
+      transform: translate(-50%, -50%);
+      will-change: transform; }
     section.home div.mapContainer canvas.map.moving, section.home div.mapContainer img.map.moving {
       animation-name: rotate;
       animation-duration: 20s;
@@ -80,7 +157,7 @@ section.home {
     will-change: transform, opacity;
     transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
     transform: translateY(10px); }
-    section.home div.textBox p {
+    section.home div.textBox p.instructions {
       position: absolute;
       bottom: 80px;
       width: 100%;
@@ -95,10 +172,29 @@ section.home {
       transform: translateX(-50%); }
     section.home div.textBox button.gradientButton.active:hover {
       transform: translateX(-50%) scale(1.2); }
-  section.home div.textBox.active {
+  section.home div.textBox.active, section.home div.titleBox.active {
     z-index: 10;
     opacity: 1;
     transform: translateY(0); }
+  section.home div.titleBox {
+    margin-top: 100px;
+    width: 100%;
+    opacity: 0;
+    will-change: transform, opacity;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    transform: translateY(10px);
+    text-align: center; }
+    section.home div.titleBox p.trip {
+      font-family: "Roboto", sans-serif;
+      font-weight: bold;
+      font-size: 40px;
+      color: white; }
+    section.home div.titleBox p.distance {
+      padding-top: 10px;
+      font-family: "Roboto", sans-serif;
+      font-weight: bold;
+      font-size: 18px;
+      color: #f11b93; }
 
 section.transports {
   height: 100vh;
@@ -125,51 +221,23 @@ div.transport h3 {
   position: absolute;
   top: 80px;
   height: 60px;
-  width: 100%;
-  text-align: center;
-  font-family: 'Roboto', sans-serif;
-  font-size: 40px;
-  font-weight: bold;
-  text-transform: uppercase; }
+  width: 100%; }
 div.transport div.scene {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%; }
-  div.transport div.scene div.background {
-    height: 100%;
-    animation-name: slowScroll;
-    animation-duration: 20s;
-    animation-iteration-count: infinite;
-    animation-fill-mode: forwards;
-    animation-timing-function: linear; }
-    div.transport div.scene div.background img:nth-child(1) {
-      position: absolute;
-      top: 0;
-      left: 0;
-      min-height: 100%;
-      min-width: 100%; }
-    div.transport div.scene div.background img:nth-child(2) {
-      position: absolute;
-      top: 0;
-      transform: translateX(100%);
-      min-height: 100%;
-      min-width: 100%; }
-@keyframes slowScroll {
-  0% {
-    transform: translateX(0); }
-  100% {
-    transform: translateX(-100%); } }
   div.transport div.scene div.transportPic {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 60%;
+    width: 45%;
     transform: translateX(-50%); }
     div.transport div.scene div.transportPic img {
       display: inline-block;
       width: 100%;
+      max-height: 350px;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -214,6 +282,41 @@ div.transport div.scene {
         transform: translate(0, -50%);
         opacity: 1; }
 
+div.speedJauge {
+  position: absolute;
+  left: 30px;
+  bottom: 30%;
+  height: 50%; }
+  div.speedJauge p {
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    position: absolute;
+    bottom: 0;
+    left: 30px;
+    transform-origin: 0 100%;
+    transform: rotate(-90deg); }
+  div.speedJauge div.jauge {
+    position: absolute;
+    bottom: 0;
+    left: 45px;
+    width: 40px;
+    height: 100%;
+    border: solid 1px white;
+    overflow: hidden;
+    box-shadow: 6px 6px 10px rgba(238, 26, 153, 0.3); }
+    div.speedJauge div.jauge div.fillJauge {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #F11B93 -2.63%, #BF0DD7 69.24%);
+      transform-origin: bottom;
+      transform: translateY(80%);
+      border-top: solid 1px white;
+      will-change: transform;
+      transition: transform 0.4s ease-out; }
+
 div.mainInfos {
   position: absolute;
   bottom: 0;
@@ -229,15 +332,15 @@ div.mainInfos {
     font-size: 0; }
     div.mainInfos div.timing div.screen, div.mainInfos div.timing div.unit {
       position: relative;
-      margin: 0 6px;
-      background: #0D0D0D;
-      border: solid #615b82 2px;
-      border-radius: 5px;
+      margin: 0 5px;
+      background: rgba(0, 0, 0, 0);
+      border: solid white 1px;
       height: 70px;
       width: 60px;
       text-align: center;
       vertical-align: middle;
-      overflow: hidden; }
+      overflow: hidden;
+      box-shadow: 4px 4px 10px rgba(238, 26, 153, 0.3); }
       div.mainInfos div.timing div.screen span, div.mainInfos div.timing div.unit span {
         position: absolute;
         top: 50%;
@@ -257,7 +360,7 @@ div.mainInfos {
       div.mainInfos div.timing div.screen span.removed, div.mainInfos div.timing div.unit span.removed {
         transform: translate(-50%, -200%); }
       div.mainInfos div.timing div.screen span.unit, div.mainInfos div.timing div.unit span.unit {
-        font-size: 10px; }
+        font-size: 14px; }
   div.mainInfos p {
     padding-top: 25px;
     text-transform: uppercase;
@@ -318,6 +421,256 @@ div.mainInfos {
       div.mainInfos nav.transportNav ul li.active span.dot span.activeTransport {
         transform: scale(1); }
 
+section.bfrPage {
+  height: 100vh;
+  background: linear-gradient(90deg, #3A0063 0.13%, #1B1464 99.86%);
+  position: relative;
+  overflow: hidden; }
+  section.bfrPage .stars {
+    position: absolute;
+    top: 0;
+    left: 0; }
+  section.bfrPage h3 {
+    position: absolute;
+    top: 80px;
+    width: 100%; }
+  section.bfrPage .bfrIllustration {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 45%; }
+    section.bfrPage .bfrIllustration img {
+      width: 220px; }
+    section.bfrPage .bfrIllustration h5 {
+      font-family: 'Roboto', sans-serif;
+      font-size: 17px;
+      transform: translateY(20px); }
+    section.bfrPage .bfrIllustration .scrollText .more {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: #f11b93;
+      color: #fcfcfc;
+      border-radius: 50%;
+      cursor: pointer;
+      transition-duration: 0.5s; }
+    section.bfrPage .bfrIllustration .scrollText .moreHover {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: #fcfcfc;
+      color: #f11b93;
+      border-radius: 50%;
+      cursor: pointer;
+      transform: rotate(45deg); }
+    section.bfrPage .bfrIllustration .scrollText .info-1 {
+      top: 10%;
+      left: 10%; }
+    section.bfrPage .bfrIllustration .scrollText .info-2 {
+      top: 50%;
+      left: 8%; }
+    section.bfrPage .bfrIllustration .scrollText .info-3 {
+      top: 70%;
+      left: 20%; }
+    section.bfrPage .bfrIllustration .scrollText .info-4 {
+      top: 90%;
+      left: 8%; }
+    section.bfrPage .bfrIllustration .scrollText .textHidden {
+      position: absolute;
+      padding: 10px;
+      background-color: #590977;
+      opacity: 0;
+      transform: translateX(-5px);
+      transition-duration: 0.5s;
+      will-change: transform, opacity; }
+      section.bfrPage .bfrIllustration .scrollText .textHidden h6, section.bfrPage .bfrIllustration .scrollText .textHidden p {
+        font-size: 13px;
+        text-align: center;
+        line-height: 15px; }
+    section.bfrPage .bfrIllustration .scrollText .textHidden.open {
+      opacity: 1;
+      transform: translateX(0px); }
+    section.bfrPage .bfrIllustration .scrollText .infoText-1 {
+      top: 4%;
+      left: 16%; }
+    section.bfrPage .bfrIllustration .scrollText .infoText-2 {
+      top: 42%;
+      left: 10%; }
+    section.bfrPage .bfrIllustration .scrollText .infoText-3 {
+      top: 62%;
+      left: 15%; }
+    section.bfrPage .bfrIllustration .scrollText .infoText-4 {
+      top: 82%;
+      left: 10%; }
+  section.bfrPage .bfrDocumentation {
+    position: absolute;
+    top: 30%;
+    right: 1%;
+    width: 55%; }
+    section.bfrPage .bfrDocumentation .leftSide {
+      display: inline-block;
+      padding: 10px;
+      width: 35%;
+      border-right: 1px solid #fff;
+      text-align: right; }
+    section.bfrPage .bfrDocumentation .rightSide {
+      display: inline-block;
+      margin-top: 15px;
+      margin-left: 7px;
+      vertical-align: top;
+      width: 35%; }
+    section.bfrPage .bfrDocumentation p {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 19px; }
+    section.bfrPage .bfrDocumentation h4 {
+      margin-bottom: 5px;
+      font-size: 22px; }
+    section.bfrPage .bfrDocumentation .textBlock {
+      margin-bottom: 20px; }
+    section.bfrPage .bfrDocumentation .buttonMore {
+      padding: 13px;
+      width: 210px;
+      height: 45px;
+      text-align: center;
+      background: linear-gradient(90deg, #F11B93 -2.63%, #BF0DD7 69.24%);
+      transform: translateX(60%) translateY(60%);
+      transition-duration: 0.90s;
+      cursor: pointer; }
+      section.bfrPage .bfrDocumentation .buttonMore p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 13px;
+        font-weight: 300; }
+      section.bfrPage .bfrDocumentation .buttonMore a {
+        text-decoration: none; }
+    section.bfrPage .bfrDocumentation .buttonMore:hover {
+      background-color: linear-gradient(90deg, #BF0DD7 -2.63%, #F11B93 69.24%);
+      opacity: 0.8;
+      transform: translateX(60%) translateY(50%) scale(1.1); }
+
+section.stats {
+  height: 100vh;
+  background: linear-gradient(90deg, #3A0063 0.13%, #1B1464 99.86%);
+  position: relative;
+  overflow: hidden;
+  font-size: 0; }
+  section.stats div.line {
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin-top: 80px; }
+  section.stats div.line:nth-child(2) {
+    margin-top: 40px; }
+  section.stats div.price, section.stats div.speed {
+    width: 48%;
+    height: 300px; }
+  section.stats div.time {
+    width: 100%;
+    height: 300px; }
+  section.stats h4 {
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    height: 10%; }
+  section.stats div.jauges {
+    display: flex;
+    justify-content: center;
+    height: 90%; }
+    section.stats div.jauges div.verJauge {
+      position: relative;
+      width: 70px; }
+      section.stats div.jauges div.verJauge p.transport {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+        transform-origin: 0 100%; }
+      section.stats div.jauges div.verJauge div.jauge {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 92%;
+        border: solid 1px white;
+        overflow: hidden;
+        box-shadow: 6px 6px 10px rgba(238, 26, 153, 0.3); }
+        section.stats div.jauges div.verJauge div.jauge div.fillJauge {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          background: linear-gradient(90deg, #F11B93 -2.63%, #BF0DD7 69.24%);
+          transform-origin: bottom;
+          transform: translateY(0%);
+          border-top: solid 1px white;
+          will-change: transform;
+          transition: transform 0.4s ease-out; }
+        section.stats div.jauges div.verJauge div.jauge p.value {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) rotate(-90deg);
+          font-family: "Roboto", sans-serif;
+          font-size: 14px; }
+  section.stats div.horJauges {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; }
+    section.stats div.horJauges div.column {
+      display: inline-block;
+      width: 48%; }
+    section.stats div.horJauges div.horJauge {
+      position: relative;
+      height: 70px; }
+      section.stats div.horJauges div.horJauge p.transport {
+        position: absolute;
+        left: 0;
+        bottom: 50%;
+        transform-origin: 0 100%;
+        transform: rotate(-90deg) translate(-50%, 20px);
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+        transform-origin: 0 100%;
+        text-align: center; }
+      section.stats div.horJauges div.horJauge div.jauge {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: calc(100% - 30px);
+        height: 40px;
+        border: solid 1px white;
+        overflow: hidden;
+        box-shadow: 6px 6px 10px rgba(238, 26, 153, 0.3); }
+        section.stats div.horJauges div.horJauge div.jauge div.fillJauge {
+          position: absolute;
+          top: 0;
+          right: 100%;
+          height: 100%;
+          width: 100%;
+          background: linear-gradient(90deg, #F11B93 -2.63%, #BF0DD7 69.24%);
+          transform-origin: bottom;
+          transform: translateX(0%);
+          border-right: solid 1px white;
+          will-change: transform;
+          transition: transform 0.4s ease-out; }
+        section.stats div.horJauges div.horJauge div.jauge p.value {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-family: "Roboto", sans-serif;
+          font-size: 14px; }
+
 body {
   overflow: hidden;
   height: 400vh;
@@ -334,6 +687,30 @@ body {
 
 .pinkText {
   color: #f11b93; }
+
+h3 {
+  position: relative;
+  text-align: center;
+  font-family: Roboto;
+  font-weight: bold;
+  line-height: normal;
+  text-transform: uppercase;
+  font-size: 70px;
+  color: #1B1464;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white; }
+  h3 span.lueur {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-family: Roboto;
+    font-weight: bold;
+    line-height: normal;
+    text-transform: uppercase;
+    font-size: 70px;
+    color: #1B1464;
+    text-shadow: 4px 4px 8px rgba(227, 23, 168, 0.4); }
 
 button.gradientButton {
   padding: 5px 15px;

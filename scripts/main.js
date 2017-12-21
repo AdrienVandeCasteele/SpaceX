@@ -1,47 +1,48 @@
 //DATA 
 const dataTransport = {
+
   horse: {
-    speed : 100,
+    speed : 15,
     co2: 0,
-    risk: 10,
     cost: 1000,
     facts: ["horse can't swim", "horse are nice friends", "horse can die"],
   },
   boat: {
-    speed : 100,
+    speed : 80,
     co2: 0,
     risk: 10,
     cost: 1000,
-    facts: ["horse can't swim"]
+    facts: ["the boat is the only way (off plane) to reach 2 places separated by the sea", "high price and the long duration of the trip",  "The boat is not accessible to all. Indeed, it is necessary to be close to the sea to be able to consider using it."],
   },
   train: {
-    speed : 100,
+    speed : 575,
     co2: 0,
     risk: 10,
     cost: 1000,
-    facts: ["horse can't swim"]
+    facts: ["the train allows a quick move across a country or continent", "we are limited to traveling on the same country or the same continent", "the train is quite accessible and offers the possibility to move quickly without going in the air"],
   },
   car: {
     speed : 100,
-    co2: 0,
+    co2: 115.07,
     risk: 10,
     cost: 1000,
-    facts: ["horse can't swim"]
+    facts: ["The car offers great accessibility. As a result, it can be used all the time and in all circumstances", " Limited on accessible geographic area ; risk of sleep while driving and very polluting", " the car seems to be pretty accessible to everyone. Today, it is the most used means of transport in the world"],
   },
   plane: {
-    speed : 100,
+    speed : 980,
     co2: 0,
     risk: 10,
     cost: 1000,
-    facts: ["horse can't swim"]
+    facts: ["The car offers great accessibility. As a result, it can be used all the time and in all circumstances", "The plane is a means of transport more and more used in the world. It is undoubtedly the most secure and controlled means of transport."]
   },
   bfr: {
-    speed : 100,
+    speed : 16000,
     co2: 0,
     risk: 10,
     cost: 1000,
-    facts: ["horse can't swim"]
+    facts: ["The BFR is 25 times faster than the plane ! ", "The BFR tickets will cost more or less the price of a plane ticket", "The Big Fucking Rocket is only accessible in the Biggest City, like New-York, Dubai, London or Shanghai."]
   }
+
 }
 
 const dataTravel = {
@@ -79,17 +80,13 @@ const dataTravel = {
 
 // Math functions
 
-const getTiming = (transport, travel)=> {
-
-}
-
 const getDistance = (departure, destination)=>{
   if(destination == paris){
     return departure.distance.paris
   } else if(destination == newYork){
     return departure.distance.newYork
   } else if(destination == shanghai){
-    return departure.distance.paris
+    return departure.distance.shanghai
   } else if(destination == dakar){
     return departure.distance.dakar
   } else if(destination == moscou){
@@ -97,12 +94,49 @@ const getDistance = (departure, destination)=>{
   }
 }
 
+const getTime = (transport)=>{
+  const distance = getDistance(activeDestinations[0], activeDestinations[1])
+  return distance/transport.speed
+}
+
 const parseTime = (time)=>{
   time = Math.floor(time*60)
-  let minutes = time%24
+  let minutes = time%60
   let hours = Math.floor(time/60)%24
   let days = Math.floor(time/60/24)
   return [Math.floor(days/10), days%10, Math.floor(hours/10), hours%10, Math.floor(minutes/10), minutes%10]
+}
+
+//Stats function
+
+const getSpeedStats = (transport)=>{
+  let max = transport
+  for(let i=0; i<transportsParts.length; i++){
+    if(transportsParts[i].speed>max.speed){
+      max = transportsParts[i]
+    }
+  }
+  return transport.speed/max.speed*100
+}
+
+const getPriceStats = (transport)=>{
+  let max = transport
+  for(let i=0; i<transportsParts.length; i++){
+    if(transportsParts[i].cost>max.cost){
+      max = transportsParts[i]
+    }
+  }
+  return transport.cost/max.cost*100
+}
+
+const getTimeStats = (transport)=>{
+  let max = transport
+  for(let i=0; i<transportsParts.length; i++){
+    if(getTime(transportsParts[i])>getTime(max)){
+      max = transportsParts[i]
+    }
+  }
+  return getTime(transport)/getTime(max)*100
 }
 
 //NAV
@@ -116,17 +150,24 @@ const $main = document.querySelector("main"),
       $navBar = document.querySelector('nav.navBar'),
       $navParts = Array.from($navBar.querySelectorAll('li'))
 
-let currentSection = 0,
-    canScroll = false,
-    freeScroll = false,
-    scrolled = false,
-    currentScroll = 0
-
 const goToSection = (section)=>{
+  if(activeDestinations.length<2){
+    activeDestinations = [newYork, shanghai]
+    displayEarth()
+    startCanvas()
+    updateNewText()
+    changeMainText()
+    updateTransportText()
+    updateTransportTiming(transportsParts[0])
+    updateTransportSpeed(transportsParts[0])
+  }
   currentSection = section
   console.log(section)
   $main.style.transform=`translateY(${-section*25}%)`
   updateActiveSection(section)
+  if(currentSection==3){
+    updateStats()
+  }
 }
 
 const updateActiveSection = (section)=>{
@@ -137,26 +178,42 @@ const updateActiveSection = (section)=>{
 
 for(let i=0; i<$navParts.length; i++){
   $navParts[i].addEventListener('click', ()=>{goToSection(i)})
+  console.log(i)
 }
+
+let currentSection = 0,
+    scrolled = false,
+    canScroll = false,
+    resetingScroll = false,
+    currentScroll = 500
+
+const resetScroll= ()=>{
+  resetingScroll = true
+  window.scrollTo(0, 500)
+  setTimeout(()=>{resetingScroll = false}, 10)
+}
+
 
 window.addEventListener('scroll', (e)=>{
   e.preventDefault()
-  const offset = window.pageYOffset
-  let toTop = 0
-  if(offset>=currentScroll && currentSection<4){
-    toTop = 1
-  } else if(currentSection>0){
-    toTop = -1
+  if(canScroll){
+    const offset = window.pageYOffset
+    let toTop = 0
+    if(offset>=currentScroll && currentSection<3){
+      toTop = 1
+    } else if(offset<=currentScroll && currentSection>0){
+      toTop = -1
+    }
+    if(!scrolled){
+      scrolled = true
+      console.log('ça scroll')
+      goToSection(currentSection+toTop)
+      window.setTimeout(()=>{
+        scrolled = false
+      }, 1500)
+    }
+    resetScroll()
   }
-  if(!scrolled){
-    scrolled = true
-    console.log('ça scroll')
-    goToSection(currentSection+toTop)
-    window.setTimeout(()=>{
-      scrolled = false
-    }, 2000)
-  }
-  currentScroll = offset
 })
 
 
@@ -219,7 +276,7 @@ const newYork = {
         x: 470,
         y: 160,
         r: 4,
-        text: "MOSCOU",
+        text: "MOSCOW",
         textX: 490,
         textY: 145,
         textW: 0,
@@ -298,6 +355,7 @@ const activateDestination = (e)=>{
       }
       status = activeDestinations.length
       updateText()
+      canScroll = true
     }
   }
 }
@@ -345,9 +403,11 @@ const $textBox = $home.querySelector('div.mainText'),
       $instructionsButton = $textBox.querySelector('.gradientButton'),
       InstructionLink = $textBox.querySelector('.buttonLink'),
       $newTextBox = $home.querySelector('.newText'),
-      $newTextTitle = $newTextBox.querySelector('p.instructions'),
       $newTextButton = $newTextBox.querySelector('.gradientButton'),
-      $newTextLink = $newTextBox.querySelector('.buttonLink')
+      $newTextLink = $newTextBox.querySelector('.buttonLink'),
+      $titleBox = $home.querySelector('div.titleBox'),
+      $titleTrip = $titleBox.querySelector('p.trip'),
+      $titleDistance = $titleBox.querySelector('p.distance')
 
 $newTextBox.classList.remove("active")
 $home.appendChild($newTextBox)
@@ -392,6 +452,7 @@ InstructionLink.addEventListener('click', (e)=>{
     changeMainText()
     updateTransportText()
     updateTransportTiming(transportsParts[0])
+    updateTransportSpeed(transportsParts[0])
   }
 })
 
@@ -401,12 +462,12 @@ const earth = $home.querySelector("div.mapContainer"),
       newContext = cloneCanvas.getContext('2d')
 
 const startCanvas = ()=>{
-  cloneBackground.style.left="200%"
+  cloneBackground.style.left="202%"
   earth.appendChild(cloneBackground)
   cloneBackground.classList.add("moving")
   mapBackground.classList.add('moving')
   map.classList.add("moving")
-  cloneCanvas.style.left="200%"
+  cloneCanvas.style.left="202%"
   earth.appendChild(cloneCanvas)
   newContext.drawImage(map, 0, 0, cloneCanvas.offsetWidth, cloneCanvas.offsetHeight)
   cloneCanvas.classList.add("moving")
@@ -417,12 +478,14 @@ const displayEarth = ()=>{
 }
 
 const updateNewText = ()=>{
-  $newTextTitle.innerHTML=`From ${activeDestinations[0].text} to ${activeDestinations[1].text} in about <span class="pinkText">30min!</span>`
+  $titleTrip.textContent=`${activeDestinations[0].text} - ${activeDestinations[1].text}`
+  $titleDistance.textContent=`${getDistance(activeDestinations[0], activeDestinations[1])}km`
 }
 
 const changeMainText = ()=>{
   $textBox.classList.remove('active')
   $newTextBox.classList.add('active')
+  $titleBox.classList.add('active')
 }
 
 $newTextLink.addEventListener('click', (e)=>{
@@ -437,7 +500,7 @@ $newTextLink.addEventListener('click', (e)=>{
 
 const $transportNav = $transports.querySelector('nav'),
       $transportNavParts = Array.from($transportNav.querySelectorAll('li')),
-      transportsParts = [dataTransport.horse, dataTransport.boat, dataTransport.train, dataTransport.car, dataTransport.plane, dataTransport.bfr],
+      transportsParts = [dataTransport.horse, dataTransport.boat, dataTransport.car, dataTransport.train, dataTransport.plane, dataTransport.bfr],
       $sliding = $transports.querySelector('.sliding')
 
 // init Transport functions
@@ -447,8 +510,8 @@ const updateTransportDot = (transport)=>{
   for(let i=0; i<$infoDots.length; i++){
     $infoDots[i].querySelector('p').textContent=transport.facts[i]
     const coords = $infoDots[i].dataset.coords.split(" ")
-   console.log(coords) 
-   $infoDots[i].style.transform=`translate(${coords[0]*transport.DOM.offsetWidth}px, ${coords[1]*transport.DOM.offsetWidth}px)`
+    console.log(coords) 
+    $infoDots[i].style.transform=`translate(${coords[0]*transport.DOM.offsetWidth}px, ${coords[1]*transport.DOM.offsetWidth}px)`
   }
 }
 
@@ -491,6 +554,7 @@ const goToTransport = (index)=>{
   $sliding.style.transform=`translateX(${-index*100/6}%)`
   updateActiveTransport(index+1)
   updateTransportTiming(transportsParts[index])
+  updateTransportSpeed(transportsParts[index])
 }
 
 const updateActiveTransport = (index)=>{
@@ -505,12 +569,12 @@ const updateActiveTransport = (index)=>{
 const $mainInfos = $transports.querySelector('div.mainInfos'),
       $places = $mainInfos.querySelector('p'),
       $timing = $mainInfos.querySelector('div.timing'),
-      $screens = Array.from($timing.querySelectorAll('div.screen'))
+      $screens = Array.from($timing.querySelectorAll('div.screen')),
+      $speedJauge = $transports.querySelector('div.fillJauge')
 
 
 const updateTransportTiming = (transport)=>{
-  const distance = getDistance(activeDestinations[0], activeDestinations[1])
-  const time = parseTime(distance/transport.speed)
+  const time = parseTime(getTime(transport))
   for(let i=0; i<$screens.length; i++){
     const $newText= document.createElement('span'),
           $oldText= $screens[i].querySelector('span')
@@ -522,10 +586,8 @@ const updateTransportTiming = (transport)=>{
       $newText.classList.remove("hidden")
       window.setTimeout(()=>{
         $oldText.remove()
-      },
-                        400)
-    },
-                      i*100)
+      },400)
+    },i*100)
   }
 }
 
@@ -533,8 +595,138 @@ const updateTransportText = ()=>{
   $places.textContent=`From ${activeDestinations[0].text} to ${activeDestinations[1].text}`
 }
 
+// transport speed
+
+const updateTransportSpeed = (transport)=>{
+  const ratio = getSpeedStats(transport)
+  $speedJauge.style.transform= `translateY(${-ratio}%)`
+}
+
+// transport background
+
+const $backgroundCanvas = $transports.querySelector('canvas.background'),
+      backgroundContext = $backgroundCanvas.getContext('2d')
+
+let particles = []
+
+const purpleToBlue = backgroundContext.createLinearGradient(0,0,$backgroundCanvas.offsetWidth,0);
+purpleToBlue.addColorStop(0,"rgba(58, 0, 99, 0.2)");
+purpleToBlue.addColorStop(1,"rgba(27, 20, 100, 0.2)");
+
+$backgroundCanvas.setAttribute("width", $transports.offsetWidth)
+$backgroundCanvas.setAttribute("height", $transports.offsetHeight)
+
+const drawParticle = (particle)=>{
+  backgroundContext.beginPath()
+  backgroundContext.arc(particle.x, particle.y, 2, 0, 2*Math.PI)
+  backgroundContext.fillStyle="white"
+  backgroundContext.fill()
+}
+
+const moveParticle = ()=>{
+  backgroundContext.beginPath()
+
+  window.requestAnimationFrame(moveParticle)
+
+  backgroundContext.fillStyle= purpleToBlue
+  backgroundContext.rect(0, 0, $backgroundCanvas.offsetWidth, $backgroundCanvas.offsetHeight)
+  backgroundContext.fill()
+  for(let i=0; i<particles.length; i++){
+    drawParticle(particles[i])
+    particles[i].x -= transportsParts[currentTransport].speed/20
+    if(particles[i].x<-3){
+      particles.splice(i, 1)
+    }
+  }
+}
+
+const createParticle = ()=>{
+  const particle = {
+    x: $backgroundCanvas.offsetWidth,
+    y: Math.random()*$backgroundCanvas.offsetHeight
+  }
+  particles.push(particle)
+
+  window.setTimeout(createParticle, 200)
+}
+
+createParticle()
+
+moveParticle()
 
 
+
+// MORE
+const $infoFirst = $main.querySelector(".info-1"),
+      $infoTextFirst = $main.querySelector(".infoText-1"),
+      $infoSecond = $main.querySelector(".info-2"),
+      $infoTextSecond = $main.querySelector(".infoText-2"),
+      $infoThree = $main.querySelector(".info-3"),
+      $infoTextThree = $main.querySelector(".infoText-3"),
+      $infoLast = $main.querySelector(".info-4"),
+      $infoTextLast = $main.querySelector(".infoText-4")
+
+
+$infoFirst.addEventListener('click', (event) => {
+  event.preventDefault(); 
+  $infoTextFirst.classList.toggle('open')
+  $infoFirst.classList.toggle('moreHover')
+
+})
+
+$infoSecond.addEventListener('click', () => {
+  $infoTextSecond.classList.toggle('open')
+  $infoSecond.classList.toggle('moreHover')
+})
+
+$infoThree.addEventListener('click', () => {
+  $infoTextThree.classList.toggle('open')
+  $infoThree.classList.toggle('moreHover')
+})
+
+$infoLast.addEventListener('click', () => {
+  $infoTextLast.classList.toggle('open')
+  $infoLast.classList.toggle('moreHover')
+})
+
+// UPDATE STATS
+
+const $priceStatsJauges = Array.from($stats.querySelectorAll('.price .fillJauge')),
+      $priceStatsValues = Array.from($stats.querySelectorAll('.price .value')),
+      $speedStatsJauges = Array.from($stats.querySelectorAll('.speed .fillJauge')),
+      $speedStatsValues = Array.from($stats.querySelectorAll('.speed .value')),
+      $timeStatsJauges = Array.from($stats.querySelectorAll('.time .fillJauge')),
+      $timeStatsValues = Array.from($stats.querySelectorAll('.time .value'))
+
+const updateStats = ()=>{
+  for(let i=0; i<transportsParts.length; i++){
+    window.setTimeout(()=>{updatePriceStats(i)}, i*100)
+    window.setTimeout(()=>{updateSpeedStats(i)}, i*100 + 300)
+    window.setTimeout(()=>{updateTimeStats(i)}, i*100 + 600)
+  }
+}
+
+const updatePriceStats = (index)=>{
+  $priceStatsValues[index].textContent= transportsParts[index].cost
+  let ratio = getPriceStats(transportsParts[index])
+  $priceStatsJauges[index].style.transform= `translateY(${-ratio}%)`
+}
+
+const updateSpeedStats = (index)=>{
+  $speedStatsValues[index].textContent= transportsParts[index].speed
+  let ratio = getSpeedStats(transportsParts[index])
+  $speedStatsJauges[index].style.transform= `translateY(${-ratio}%)`
+}
+
+const updateTimeStats = (index)=>{
+  const time = parseTime(getTime(transportsParts[index]))
+
+  const parsedTime = `${time[0]}${time[1]}d ${time[2]}${time[3]}h ${time[4]}${time[5]}min`
+
+  $timeStatsValues[index].textContent= parsedTime
+  let ratio = getTimeStats(transportsParts[index])
+  $timeStatsJauges[index].style.transform= `translateX(${ratio}%)`
+}
 
 
 

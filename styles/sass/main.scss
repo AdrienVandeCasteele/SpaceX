@@ -1,17 +1,20 @@
 @import "variables";
+@import "social";
 
 @import "nav";
 @import "mapSection";
 @import "transportSection";
+@import "bfrSection";
+@import "statsSection";
 
 
 body{
-  overflow: hidden;
+  overflow:hidden; 
   height: 400vh;
   background: $darkPurple;
   font-family: 'Lato', sans-serif;
   color: $white;
-  
+
   main{
     overflow: hidden;
     position: fixed;
@@ -24,6 +27,33 @@ body{
 
 .pinkText{
   color: $pink;
+}
+
+h3{
+  position: relative;
+  text-align: center;
+  font-family: Roboto;
+  font-weight: bold;
+  line-height: normal;
+  text-transform: uppercase;
+  font-size: 70px;
+  color: #1B1464;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+
+  span.lueur{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-family: Roboto;
+    font-weight: bold;
+    line-height: normal;
+    text-transform: uppercase;
+    font-size: 70px;
+    color: #1B1464;
+    text-shadow: 4px 4px 8px rgba(227, 23, 168, 0.4)
+  }
 }
 
 button.gradientButton{

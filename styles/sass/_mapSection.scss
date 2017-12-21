@@ -2,6 +2,7 @@ section.home{
   height: 100vh;
   background: $purple-blue;
   position: relative;
+  overflow: hidden;
 
   div.mapContainer{
     position: absolute;
@@ -22,6 +23,7 @@ section.home{
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      will-change: transform;
     }
 
     canvas.map.moving, img.map.moving{
@@ -54,7 +56,7 @@ section.home{
     transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
     transform: translateY(10px);
 
-    p{
+    p.instructions{
       position: absolute;
       bottom: 80px;
       width: 100%;
@@ -76,9 +78,34 @@ section.home{
     }
   }
 
-  div.textBox.active{
+  div.textBox.active, div.titleBox.active{
     z-index: 10;
     opacity: 1;
     transform: translateY(0)
+  }
+  
+  div.titleBox{
+    margin-top: 100px;
+    width: 100%;
+    opacity: 0;
+    will-change: transform, opacity;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    transform: translateY(10px);
+    text-align: center;
+    
+    p.trip{
+      font-family: "Roboto", sans-serif;
+      font-weight: bold;
+      font-size: 40px;
+      color: white;
+    }
+    
+    p.distance{
+      padding-top: 10px;
+      font-family: "Roboto", sans-serif;
+      font-weight: bold;
+      font-size: 18px;
+      color: $pink;
+    }
   }
 }

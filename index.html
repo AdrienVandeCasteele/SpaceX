@@ -13,7 +13,7 @@
     <nav class="navBar">
       <img class="logo" alt="SpaceX Logo" src="images/whiteLogo.png">
       <ul>
-        <li><a href="#" title="#">Home</a><div class="activeSection"></div></li>
+        <li><a href="#" title="#">Home</a><div class="activeSection active"></div></li>
         <li><a href="#" title="#">Story</a><div class="activeSection"></div></li>
         <li><a href="#" title="#">BFR</a><div class="activeSection"></div></li>
         <li><a href="#" title="#">Stats</a><div class="activeSection"></div></li>
@@ -32,20 +32,65 @@
           <button class="deadGradientButton" href="#">Let's Go</button>
           <a class="buttonLink" href="#"><button class="gradientButton">Let's Go</button></a>
         </div>
+        <div class="titleBox">
+          <p class="trip">Paris-New York</p>
+          <p class="distance">10000 km</p>
+        </div>
         <div class="textBox newText">
-          <p class="instructions">Your trip in only <span class="pinkText">30 minutes!</span></p>
+          <p class="instructions">What is <span class="pinkText">the fastest</span> way to <span class="pinkText">travel</span></p>
           <a class="buttonLink" href="#Transports"><button class="gradientButton active">Discover</button></a>
         </div>
       </section>
 
       <section class="transports">
+        <canvas class="background"></canvas>
         <div class="sliding">
           <div class="transport">
             <div class="scene">
-              <div class="background">
-                <img src="images/carBackground.svg" alt="nature">
-                <img src="images/carBackground.svg" alt="nature">
+              <div class="transportPic">
+                <img src="images/horse.svg" alt="horse">
+                <div class="info">
+                  <div class="infoDot" data-coords="0.288 0.056">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
+                  <div class="infoDot" data-coords="-0.40 -0.05">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
+                  <div class="infoDot" data-coords="0 -0.10">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
+                </div>
               </div>
+            </div>
+            <h3>Horse<span class="lueur">Horse</span></h3>
+          </div>
+          <div class="transport">
+            <div class="scene">
+              <div class="transportPic">
+                <img src="images/boat.svg" alt="boat">
+                <div class="info">
+                  <div class="infoDot" data-coords="0.288 0.056">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
+                  <div class="infoDot" data-coords="-0.40 -0.05">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
+                  <div class="infoDot" data-coords="0 -0.10">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h3>Boat<span class="lueur">Boat</span></h3>
+          </div>
+          <div class="transport">
+            <div class="scene">
               <div class="transportPic">
                 <img src="images/car.svg" alt="car">
                 <div class="info">
@@ -64,142 +109,79 @@
                 </div>
               </div>
             </div>
-            <h3>Car</h3>
+            <h3>Car<span class="lueur">Car</span></h3>
           </div>
           <div class="transport">
             <div class="scene">
-              <div class="background">
-                <img src="images/carBackground.svg" alt="nature">
-                <img src="images/carBackground.svg" alt="nature">
-              </div>
-              <img src="images/plane.svg" alt="car" class="transportPic">
-              <div class="info">
-                <div class="infoDot">
-                  <p class="text"></p>
-                </div>
-                <div class="infoDot">
-                  <p class="text"></p>
-                </div>
-                <div class="infoDot">
-                  <p class="text"></p>
+              <div class="transportPic">
+                <img src="images/car.svg" alt="train">
+                <div class="info">
+                  <div class="infoDot" data-coords="0.288 0.056">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
+                  <div class="infoDot" data-coords="-0.40 -0.05">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
+                  <div class="infoDot" data-coords="0 -0.10">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
                 </div>
               </div>
             </div>
-            <h3>Car</h3>
+            <h3>Train<span class="lueur">Train</span></h3>
+          </div>
+          <div class="transport">
+            <div class="scene">
+              <div class="transportPic">
+                <img src="images/plane.svg" alt="plane">
+                <div class="info">
+                  <div class="infoDot" data-coords="0.288 0.056">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
+                  <div class="infoDot" data-coords="-0.40 -0.05">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
+                  <div class="infoDot" data-coords="0 -0.10">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h3>Plane<span class="lueur">Plane</span></h3>
+          </div>
+          <div class="transport">
+            <div class="scene">
+              <div class="transportPic">
+                <img src="images/bfr.svg" alt="bfr">
+                <div class="info">
+                  <div class="infoDot" data-coords="0.288 0.056">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
+                  <div class="infoDot" data-coords="-0.40 -0.05">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
+                  <div class="infoDot" data-coords="0 -0.10">
+                    <img src="images/more.svg" alt="show info">
+                    <p class="text">Car is the more risky way for travelling. Please be cautious while driving.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h3>BFR<span class="lueur">BFR</span></h3>
+          </div>
 
-          </div>
-          <div class="transport">
-            <div class="scene">
-              <div class="background">
-                <img src="images/carBackground.svg" alt="nature">
-                <img src="images/carBackground.svg" alt="nature">
-              </div>
-              <img src="images/car.svg" alt="car" class="transportPic">
-              <div class="info">
-                <div class="infoDot"></div>
-                <div class="infoText">
-                  <p class="text"></p>
-                </div>
-              </div>
-              <div class="info">
-                <div class="infoDot"></div>
-                <div class="infoText">
-                  <p class="text"></p>
-                </div>
-              </div>
-              <div class="info">
-                <div class="infoDot"></div>
-                <div class="infoText">
-                  <p class="text"></p>
-                </div>
-              </div>
-            </div>
-            <h3>Car</h3>
-          </div>
-          <div class="transport">
-            <div class="scene">
-              <div class="background">
-                <img src="images/carBackground.svg" alt="nature">
-                <img src="images/carBackground.svg" alt="nature">
-              </div>
-              <img src="images/car.svg" alt="car" class="transportPic">
-              <div class="info">
-                <div class="infoDot"></div>
-                <div class="infoText">
-                  <p class="text"></p>
-                </div>
-              </div>
-              <div class="info">
-                <div class="infoDot"></div>
-                <div class="infoText">
-                  <p class="text"></p>
-                </div>
-              </div>
-              <div class="info">
-                <div class="infoDot"></div>
-                <div class="infoText">
-                  <p class="text"></p>
-                </div>
-              </div>
-            </div>
-            <h3>Car</h3>
-          </div>
-          <div class="transport">
-            <div class="scene">
-              <div class="background">
-                <img src="images/carBackground.svg" alt="nature">
-                <img src="images/carBackground.svg" alt="nature">
-              </div>
-              <img src="images/car.svg" alt="car" class="transportPic">
-              <div class="info">
-                <div class="infoDot"></div>
-                <div class="infoText">
-                  <p class="text"></p>
-                </div>
-              </div>
-              <div class="info">
-                <div class="infoDot"></div>
-                <div class="infoText">
-                  <p class="text"></p>
-                </div>
-              </div>
-              <div class="info">
-                <div class="infoDot"></div>
-                <div class="infoText">
-                  <p class="text"></p>
-                </div>
-              </div>
-            </div>
-            <h3>Car</h3>
-          </div>
-          <div class="transport">
-            <div class="scene">
-              <div class="background">
-                <img src="images/carBackground.svg" alt="nature">
-                <img src="images/carBackground.svg" alt="nature">
-              </div>
-              <img src="images/car.svg" alt="car" class="transportPic">
-              <div class="info">
-                <div class="infoDot"></div>
-                <div class="infoText">
-                  <p class="text"></p>
-                </div>
-              </div>
-              <div class="info">
-                <div class="infoDot"></div>
-                <div class="infoText">
-                  <p class="text"></p>
-                </div>
-              </div>
-              <div class="info">
-                <div class="infoDot"></div>
-                <div class="infoText">
-                  <p class="text"></p>
-                </div>
-              </div>
-            </div>
-            <h3>Car</h3>
-          </div>
+        </div>
+        <div class="speedJauge">
+          <p>Speed</p>
+          <div class="jauge"><div class="fillJauge"></div></div>
         </div>
         <div class="mainInfos">
           <div class="timing">
@@ -229,18 +211,239 @@
         </div>
       </section>
 
-      <section class="bfr">
-
+      <section class="bfrPage">
+        <h3>BFR<span class="lueur">BFR</span></h3>
+        <div class="bfrIllustration">
+          <div class="scrollText">
+            <button class="more info-1">+</button>
+            <div class="textHidden infoText-1">
+              <h6>Tech Spotlight</h6>
+              <p>Vehicule length : <span class="pinkText">106m</span></p>
+              <p>Booster length : <span class="pinkText">58m</span></p>
+              <p>Booster Thrust : <span class="pinkText">52,700kN</span></p>
+            </div>
+          </div>
+          <div class="scrollText">
+            <button class="more info-2">+</button>
+            <div class="textHidden infoText-2">
+              <p>Payload</p>
+            </div>
+          </div>
+          <div class="scrollText">
+            <button class="more info-3">+</button>
+            <div class="textHidden infoText-3">
+              <p>Propellant Tanks</p>
+            </div>
+          </div>
+          <div class="scrollText">
+            <button class="more info-4">+</button>
+            <div class="textHidden infoText-4">
+              <p>Engines and Delta Wing</p>
+            </div>
+          </div>
+          <img src="images/bfrSection.svg" alt="Bfr" class="imgBfr">
+          <h5>Technical aspects of the <span class="pinkText">Rocket</span></h5>
+        </div>
+        <div class="bfrDocumentation">
+          <div class="leftSide">
+            <div class="textBlock">
+              <h4>Why <span class="pinkText">BFR ?</span></h4>
+              <p>BFR means Big Fucking Rocket is the next heavy launcher of SpaceX, the Elon Musk company in the aerospace sector. This new launcher aims to replace the Falcon 9, Falcon Heavy and the Dragon capsule used to refuel the International Space Station in the long term.</p>
+            </div>
+            <div class="textBlock">
+              <h4><span class="pinkText">Accessibility</span></h4>
+              <p>The Big Fucking Rocket is only accessible in the Biggest City, like New-York, Dubai, London or Shanghai.</p>
+            </div>
+          </div>
+          <div class="rightSide">
+            <div class="textBlock">
+              <h4>Time and <span class="pinkText">Distance</span></h4>
+              <p>With the BFR distances our relationship to distances will completely change, indeed in the future we could live in New York and go to work in Shanghai.</p>
+            </div>
+            <div class="textBlock">
+              <h4><span class="pinkText">Advantage</span></h4>
+              <p>The BFR is 25 times faster than the plane !</p>
+            </div>
+            <div class="textBlock">
+              <h4><span class="pinkText">Price</span></h4>
+              <p>the BFR tickets will cost more or less the price of a plane ticket</p>
+            </div>
+          </div>
+          <div class="buttonMore">
+            <a href="#"><p>Compare with other transports</p></a>
+          </div>
+        </div>
+      </section>
+      <section class="stats">
+        <div class="line">
+          <div class="price">
+            <h4>Prices ($)</h4>
+            <div class="jauges">
+              <div class="verJauge">
+                <p class="transport">Horse</p>
+                <div class="jauge">
+                  <div class="fillJauge">/p>
+                  </div><p class="value">100</p>
+                </div>
+              </div>
+              <div class="verJauge">
+                <p class="transport">Boat</p>
+                <div class="jauge">
+                  <div class="fillJauge">
+                  </div><p class="value">100</p>
+                </div>
+              </div>
+              <div class="verJauge">
+                <p class="transport">Car</p>
+                <div class="jauge">
+                  <div class="fillJauge">
+                  </div><p class="value">100</p>
+                </div>
+              </div>
+              <div class="verJauge">
+                <p class="transport">Train</p>
+                <div class="jauge">
+                  <div class="fillJauge">
+                  </div><p class="value">100</p>
+                </div>
+              </div>
+              <div class="verJauge">
+                <p class="transport">Plane</p>
+                <div class="jauge">
+                  <div class="fillJauge">
+                  </div><p class="value">100</p>
+                </div>
+              </div>
+              <div class="verJauge">
+                <p class="transport">BFR</p>
+                <div class="jauge">
+                  <div class="fillJauge">
+                  </div><p class="value">100</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="speed">
+            <h4>Speed (km/h)</h4>
+            <div class="jauges">
+              <div class="verJauge">
+                <p class="transport">Horse</p>
+                <div class="jauge">
+                  <div class="fillJauge">
+                  </div><p class="value">100</p>
+                </div>
+              </div>
+              <div class="verJauge">
+                <p class="transport">Boat</p>
+                <div class="jauge">
+                  <div class="fillJauge">
+                  </div><p class="value">100</p>
+                </div>
+              </div>
+              <div class="verJauge">
+                <p class="transport">Car</p>
+                <div class="jauge">
+                  <div class="fillJauge">
+                  </div><p class="value">100</p>
+                </div>
+              </div>
+              <div class="verJauge">
+                <p class="transport">Train</p>
+                <div class="jauge">
+                  <div class="fillJauge">
+                  </div><p class="value">100</p>
+                </div>
+              </div>
+              <div class="verJauge">
+                <p class="transport">Plane</p>
+                <div class="jauge">
+                  <div class="fillJauge">
+                  </div><p class="value">100</p>
+                </div>
+              </div>
+              <div class="verJauge">
+                <p class="transport">BFR</p>
+                <div class="jauge">
+                  <div class="fillJauge">
+                  </div><p class="value">100</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="line">
+          <div class="time">
+            <h4>Travel Duration</h4>
+            <div class="horJauges">
+              <div class="column">
+                <div class="horJauge">
+                  <p class="transport">Horse</p>
+                  <div class="jauge">
+                    <div class="fillJauge">
+                    </div>
+                    <p class="value">100</p>
+                  </div>
+                </div>
+                <div class="horJauge">
+                  <p class="transport">Boat</p>
+                  <div class="jauge">
+                    <div class="fillJauge">
+                    </div>
+                    <p class="value">100</p>
+                  </div>
+                </div>
+                <div class="horJauge">
+                  <p class="transport">Car</p>
+                  <div class="jauge">
+                    <div class="fillJauge">
+                    </div>
+                    <p class="value">100</p>
+                  </div>
+                </div>
+              </div>
+              <div class="column">
+                <div class="horJauge">
+                  <p class="transport">Train</p>
+                  <div class="jauge">
+                    <div class="fillJauge">
+                    </div>
+                    <p class="value">100</p>
+                  </div>
+                </div>
+                <div class="horJauge">
+                  <p class="transport">Plane</p>
+                  <div class="jauge">
+                    <div class="fillJauge">
+                    </div>
+                    <p class="value">100</p>
+                  </div>
+                </div>
+                <div class="horJauge">
+                  <p class="transport">BFR</p>
+                  <div class="jauge">
+                    <div class="fillJauge">
+                    </div>
+                    <p class="value">100</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
 
+    <!-- SOCIAL -->
+    <div class="share">
+      <img src="images/social/socialShare.png" alt="social button" class="socialShare trigger icon">
+      <a href="https://www.facebook.com/SpaceX" target="_blank"><img src="images/social/facebook.png" alt="facebook" class="socialShare icon facebook"></a>
+      <a href="https://twitter.com/spacex" target="_blank"><img src="images/social/twitter.png" alt="twitter" class="socialShare icon twitter"></a>
+      <a href="https://www.instagram.com/spacex/" target="_blank"><img src="images/social/instagram.png" alt="instagram" class="socialShare icon instagram"></a>
+      <a href="https://www.youtube.com/spacex" target="_blank"><img src="images/social/youtube.png" alt="youtube" class="socialShare icon youtube"></a>
+      <a href="https://www.flickr.com/photos/spacex" target="_blank"><img src="images/social/flick.png" alt="flickr" class="socialShare icon flickr"></a> 
+    </div>
+
 
     <script src="scripts/main.js" type="text/javascript"></script>
-
-    <!--       
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAW9aIRfhPIDbMyJMawk6I93TwrX8ylgrs&callback=initMap">
-</script>
--->
   </body>
 </html>

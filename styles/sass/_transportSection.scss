@@ -4,6 +4,9 @@ section.transports{
   position: relative;
   overflow: hidden;
 
+  canvas.background{
+  }
+
   div.sliding{
     position: absolute;
     top: 0;
@@ -31,11 +34,6 @@ div.transport{
     top: 80px;
     height: 60px;
     width: 100%;
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-    font-size: 40px;
-    font-weight: bold;
-    text-transform: uppercase;
   }
 
   div.scene{
@@ -45,40 +43,11 @@ div.transport{
     width: 100%;
     height: 100%;
 
-    div.background{
-      height: 100%;
-      animation-name: slowScroll;
-      animation-duration: 20s;
-      animation-iteration-count: infinite;
-      animation-fill-mode: forwards;  
-      animation-timing-function: linear;
-
-      img:nth-child(1){
-        position: absolute;
-        top: 0;
-        left: 0;
-        min-height: 100%;
-        min-width: 100%;
-      }
-      img:nth-child(2){
-        position: absolute;
-        top: 0;
-        transform: translateX(100%);
-        min-height: 100%;
-        min-width: 100%;
-      }
-
-      @keyframes slowScroll{
-        0%{transform: translateX(0)}
-        100%{transform: translateX(-100%)}
-      }
-    }
-
     div.transportPic{
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 60%;
+      width: 45%;
       transform: translateX(-50%);
 
 
@@ -86,6 +55,7 @@ div.transport{
       img{
         display: inline-block;
         width: 100%;
+        max-height: 350px;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -134,6 +104,7 @@ div.transport{
             color: white;
             will-change: transform, opacity;
             transition: transform 0.4s ease, opacity 0.4s ease;
+
           }
         }
 
@@ -145,6 +116,49 @@ div.transport{
           }
         }
       }
+    }
+  }
+}
+
+div.speedJauge{
+  position: absolute;
+  left: 30px;
+  bottom: 30%;
+  height: 50%;
+
+  p{
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+
+    position: absolute;
+    bottom: 0;
+    left: 30px;
+    transform-origin: 0 100%;
+    transform: rotate(-90deg);
+  }
+
+  div.jauge{
+    position: absolute;
+    bottom: 0;
+    left: 45px;
+    width: 40px;
+    height: 100%;
+    border: solid 1px white;
+    overflow: hidden;
+    box-shadow: 6px 6px 10px rgba(238, 26, 153, 0.3);
+
+    div.fillJauge{
+      position: absolute;
+      top: 100%;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: $pink-purple;
+      transform-origin: bottom;
+      transform: translateY(80%);
+      border-top: solid 1px white;
+      will-change: transform;
+      transition: transform 0.4s ease-out;
     }
   }
 }
@@ -166,15 +180,15 @@ div.mainInfos{
 
     div.screen, div.unit{
       position: relative;
-      margin: 0 6px;
-      background: #0D0D0D;
-      border: solid $darkBlue 2px;
-      border-radius: 5px;
+      margin: 0 5px;
+      background: rgba(0,0,0,0);
+      border: solid white 1px;
       height: 70px;
       width: 60px;
       text-align: center;
       vertical-align: middle;
       overflow: hidden;
+      box-shadow: 4px 4px 10px rgba(238, 26, 153, 0.3);
 
       span{
         position: absolute;
@@ -201,7 +215,7 @@ div.mainInfos{
       }
 
       span.unit{
-        font-size: 10px;
+        font-size: 14px;
       }
     }
   }
