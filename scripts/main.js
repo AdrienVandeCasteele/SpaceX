@@ -1,6 +1,5 @@
 //DATA 
 const dataTransport = {
-
   horse: {
     speed : 15,
     co2: 0,
@@ -148,7 +147,8 @@ const $main = document.querySelector("main"),
       $stats = $main.querySelector("section.stats"),
       $sections = [$home, $transports, $bfr, $stats],
       $navBar = document.querySelector('nav.navBar'),
-      $navParts = Array.from($navBar.querySelectorAll('li'))
+      $navParts = Array.from($navBar.querySelectorAll('li')),
+      $spaceLogo = $navBar.querySelector('img.logo')
 
 const goToSection = (section)=>{
   if(activeDestinations.length<2){
@@ -177,8 +177,14 @@ const updateActiveSection = (section)=>{
 }
 
 for(let i=0; i<$navParts.length; i++){
-  $navParts[i].addEventListener('click', ()=>{goToSection(i)})
-  console.log(i)
+  $navParts[i].addEventListener('click', ()=>{
+    if(i<4){
+      goToSection(i)
+    } else if(i<8){
+      goToSection(i-4)
+      menu.classList.toggle('active')
+    }
+  })
 }
 
 let currentSection = 0,
@@ -214,6 +220,16 @@ window.addEventListener('scroll', (e)=>{
     }
     resetScroll()
   }
+})
+
+// MENU RESPONSIVE
+const menu = document.querySelector('#menuResponsive'),
+      menuHamburger = document.querySelector('.menu-hamburger'),
+      menuToggle = document.querySelector('.menu-toggle')
+
+menuToggle.addEventListener('click', ()=>
+                            {                            
+  menu.classList.toggle('active')
 })
 
 
@@ -507,6 +523,7 @@ const changeMainText = ()=>{
 $newTextLink.addEventListener('click', (e)=>{
   e.preventDefault()
   goToSection(1)
+  goToTransport(0)
 })
 
 
@@ -526,8 +543,7 @@ const updateTransportDot = (transport)=>{
   for(let i=0; i<$infoDots.length; i++){
     $infoDots[i].querySelector('p').textContent=transport.facts[i]
     const coords = $infoDots[i].dataset.coords.split(" ")
-    console.log(coords) 
-    $infoDots[i].style.transform=`translate(${coords[0]*transport.DOM.offsetWidth}px, ${coords[1]*transport.DOM.offsetWidth}px)`
+  $infoDots[i].style.transform=`translate(${coords[0]*transport.DOM.offsetWidth}px, ${coords[1]*transport.DOM.offsetWidth}px)`
   }
 }
 
@@ -542,7 +558,7 @@ for(let i=0; i<$transportNavParts.length; i++){
   console.log('for')
   if(i==0){
     $transportNavParts[i].addEventListener('click', ()=>{
-      if(currentTransport>1){
+      if(currentTransport>0){
         goToTransport(currentTransport-1)
       } else{
         goToTransport(5)
@@ -724,6 +740,17 @@ const updateTimeStats = (index)=>{
   let ratio = getTimeStats(transportsParts[index])
   $timeStatsJauges[index].style.transform= `translateX(${ratio}%)`
 }
+
+// RESIZE
+
+window.addEventListener('resize', ()=>{
+  $backgroundCanvas.setAttribute("width", $transports.offsetWidth)
+  $backgroundCanvas.setAttribute("height", $transports.offsetHeight)
+  for(transport of transportsParts){
+    updateTransportDot(transport)
+  }
+})
+
 
 
 

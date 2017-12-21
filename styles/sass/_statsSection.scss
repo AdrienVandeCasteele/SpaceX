@@ -50,12 +50,11 @@ section.stats{
 
       p.transport{
         position: absolute;
-        bottom: 0;
+        bottom: -5px;
         left: 50%;
         transform: translateX(-50%);
         font-family: "Roboto", sans-serif;
         font-size: 18px;
-        transform-origin: 0 100%;
       }
 
       div.jauge{
@@ -82,7 +81,7 @@ section.stats{
           will-change: transform;
           transition: transform 0.4s ease-out;
         }
-        
+
         p.value{
           position: absolute;
           top: 50%;
@@ -157,3 +156,37 @@ section.stats{
     }
   }
 }
+
+@media (max-width: $break-large-3){
+  section.stats{
+    overflow-y: scroll;
+    
+    div.line{
+      display: block;
+
+      div.price, div.speed, div.time{
+        width: 100%;
+        height: 200px;;
+      }
+
+      div.speed{
+        margin-top: 40px;
+      }
+
+      h4{
+        color: white;
+        font-size: 18px;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-align: center;
+        height: 15%;
+      }
+
+      jauges{
+        height: 85%;
+      }
+    }
+
+  }
+}
+

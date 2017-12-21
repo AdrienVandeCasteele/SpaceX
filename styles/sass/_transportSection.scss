@@ -160,7 +160,7 @@ div.mainInfos{
       }
 
       span.unit{
-        font-size: 14px;
+        font-size: 18px;
       }
     }
   }
@@ -179,6 +179,10 @@ div.mainInfos{
     width: 100%;
 
     ul{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 60%;
       border-radius: 3px;
       height: 6px;
       background: white;
@@ -186,9 +190,6 @@ div.mainInfos{
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.3);
 
       li{
@@ -246,5 +247,41 @@ div.mainInfos{
       }
     }
 
+  }
+}
+
+@media (max-width: $break-large-3){
+  div.speedJauge{
+    display: none;
+  }
+  div.mainInfos nav.transportNav ul{
+    width: 90%;
+  }
+
+  div.mainInfos{
+    position: absolute;
+    bottom: 0;
+    height: 35%;
+    width: 100%;
+
+    div.timing{
+      padding-top: 40px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      align-items: center;
+      margin: auto;
+      font-size: 0;
+
+      div.screen, div.unit{
+        margin: 0 2px;
+        height: 40px;
+        width: 30px;
+      }
+
+      span.unit{
+        font-size: 14px;
+      }
+    }
   }
 }

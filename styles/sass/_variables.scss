@@ -19,4 +19,13 @@ $purple-blue: linear-gradient(90deg, #3A0063 0.13%, #1B1464 99.86%);
 $pink-purple: linear-gradient(90deg, #F11B93 -2.63%, #BF0DD7 69.24%);
 $purple-pink: linear-gradient(90deg, #BF0DD7 -2.63%, #F11B93 69.24%);
 $pink-alpha: 
-radial-gradient(circle at center, $pink 0, rgba(241, 27, 147, 0) 90%)
+radial-gradient(circle at center, $pink 0, rgba(241, 27, 147, 0) 90%);
+  
+  
+// Media queries
+$break-large:1600px;
+$break-large-2:960px;
+$break-large-3:750px;
+$break-medium:700px;
+$break-medium-2:480px;
+$break-small:320px;
