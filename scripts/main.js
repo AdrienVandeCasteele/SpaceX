@@ -1,44 +1,43 @@
+// Logo START
+const load = document.querySelector('.load'),
+      logoStart = document.querySelector('.logoStart'),
+      progressBar = document.querySelector('.progressBar')
+window.onload = function(){
+  load.style.zIndex = "-1";  
+  load.style.opacity="0";
+};
+
+
 //DATA 
 const dataTransport = {
   horse: {
     speed : 15,
-    co2: 0,
-    cost: 1000,
+    cost: 0.08,
     facts: ["horse can't swim", "horse are nice friends", "horse can die"],
   },
   boat: {
     speed : 80,
-    co2: 0,
-    risk: 10,
-    cost: 1000,
+    cost: 0.12,
     facts: ["the boat is the only way (off plane) to reach 2 places separated by the sea", "high price and the long duration of the trip",  "The boat is not accessible to all. Indeed, it is necessary to be close to the sea to be able to consider using it."],
   },
   train: {
-    speed : 575,
-    co2: 0,
-    risk: 10,
-    cost: 1000,
+    speed : 320,
+    cost: 0.13,
     facts: ["the train allows a quick move across a country or continent", "we are limited to traveling on the same country or the same continent", "the train is quite accessible and offers the possibility to move quickly without going in the air"],
   },
   car: {
     speed : 100,
-    co2: 115.07,
-    risk: 10,
-    cost: 1000,
+    cost: 0.10,
     facts: ["The car offers great accessibility. As a result, it can be used all the time and in all circumstances", " Limited on accessible geographic area ; risk of sleep while driving and very polluting", " the car seems to be pretty accessible to everyone. Today, it is the most used means of transport in the world"],
   },
   plane: {
     speed : 980,
-    co2: 0,
-    risk: 10,
-    cost: 1000,
+    cost: 0.18,
     facts: ["The car offers great accessibility. As a result, it can be used all the time and in all circumstances", "The plane is a means of transport more and more used in the world.", "It is undoubtedly the most secure and controlled means of transport."]
   },
   bfr: {
     speed : 16000,
-    co2: 0,
-    risk: 10,
-    cost: 1000,
+    cost: 0.18,
     facts: ["The BFR is 25 times faster than the plane ! ", "The BFR tickets will cost more or less the price of a plane ticket", "The Big Fucking Rocket is only accessible in the Biggest City, like New-York, Dubai, London or Shanghai."]
   }
 
@@ -187,6 +186,12 @@ for(let i=0; i<$navParts.length; i++){
   })
 }
 
+$spaceLogo.addEventListener('click', ()=>{
+  if(currentSection != 0){
+    goToSection(0)
+  }
+})
+
 let currentSection = 0,
     scrolled = false,
     canScroll = false,
@@ -232,7 +237,29 @@ menuToggle.addEventListener('click', ()=>
   menu.classList.toggle('active')
 })
 
+// HOME RESPONSIVE
+const $form = $home.querySelector('form'),
+      $newMobile = $home.querySelector('.newMobile'),
+      $newMobileText = $newMobile.querySelector('p.pinkText'),
+      $newMobileButton = $newMobile.querySelector('button'),
+      $error = $form.querySelector('p.error')
 
+$form.validate.addEventListener("click", ()=>{
+  if($form.departure.value != $form.arrival.value){
+    activeDestinations = [destinations[$form.departure.value], destinations[$form.arrival.value]]
+    $newMobileText.textContent=`${activeDestinations[0].text} - ${activeDestinations[1].text} is ${getDistance(activeDestinations[0], activeDestinations[1])}km`
+    $form.classList.toggle("active")
+    $newMobile.classList.toggle("active")
+    $error.classList.remove("active")
+  } else{
+    $error.classList.add("active")
+  }
+})
+
+$newMobileButton.addEventListener('click', ()=>{
+  goToSection(1)
+  goToTransport(0)
+})
 
 // CANVAS
 
@@ -253,7 +280,7 @@ const newYork = {
   x: 170,
   y: 225,
   r: 4,
-  text: "NEW YORK",
+  text: "New York",
   textX: 190,
   textY: 210,
   textW: 0,
@@ -266,7 +293,7 @@ const newYork = {
         x: 383,
         y: 192,
         r: 4,
-        text: "PARIS",
+        text: "Paris",
         textX: 403,
         textY: 177,
         textW: 0,
@@ -279,7 +306,7 @@ const newYork = {
         x: 665,
         y: 245,
         r: 4,
-        text: "SHANGHAI",
+        text: "Shanghai",
         textX: 515,
         textY: 230,
         textW: 0,
@@ -292,7 +319,7 @@ const newYork = {
         x: 470,
         y: 160,
         r: 4,
-        text: "MOSCOW",
+        text: "Moscow",
         textX: 490,
         textY: 145,
         textW: 0,
@@ -305,7 +332,7 @@ const newYork = {
         x: 350,
         y: 275,
         r: 4,
-        text: "DAKAR",
+        text: "Dakar",
         textX: 370,
         textY: 260,
         textW: 0,
@@ -543,7 +570,7 @@ const updateTransportDot = (transport)=>{
   for(let i=0; i<$infoDots.length; i++){
     $infoDots[i].querySelector('p').textContent=transport.facts[i]
     const coords = $infoDots[i].dataset.coords.split(" ")
-  $infoDots[i].style.transform=`translate(${coords[0]*transport.DOM.offsetWidth}px, ${coords[1]*transport.DOM.offsetWidth}px)`
+    $infoDots[i].style.transform=`translate(${coords[0]*transport.DOM.offsetWidth}px, ${coords[1]*transport.DOM.offsetWidth}px)`
   }
 }
 

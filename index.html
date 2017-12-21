@@ -33,11 +33,17 @@
     <link rel="stylesheet" type="text/css" href="styles/css/main.css">
   </head>
   <body>
+    <div class="load"> 
+      <img src="images/whitelogo.png" alt="logo" class="logoStart" />
+      <div class="progressBar">
+        <div class="seekBar"></div>
+      </div>
+    </div>
     <nav class="navBar">
       <img class="logo" alt="SpaceX Logo" src="images/whiteLogo.png">
       <ul class="menuTop">
         <li><a href="#Home" title="Home Section">Home</a><div class="activeSection active"></div></li>
-        <li><a href="#Story" title="Story Section">Story</a><div class="activeSection"></div></li>
+        <li><a href="#Transports" title="Transports Section">Transports</a><div class="activeSection"></div></li>
         <li><a href="#BFR" title="BFR Section">BFR</a><div class="activeSection"></div></li>
         <li><a href="#Stats" title="Stats Section">Stats</a><div class="activeSection"></div></li>
       </ul>
@@ -47,44 +53,80 @@
         <div class="menu menuBottom"></div>
       </div>
       <section id="menuResponsive">
-        <ul class="menuResponsive">
-          <li><a href="#" title="#">Home</a></li>
-          <li><a href="#" title="#">Story</a></li>
-          <li><a href="#" title="#">BFR</a></li>
-          <li><a href="#" title="#">Stats</a></li>
-        </ul>
-        <ul class="socialResponsive">
-          <li><a href="https://www.facebook.com/SpaceX" target="_blank">Facebook</a></li>
-          <li><a href="https://twitter.com/spacex" target="_blank">Twitter</a></li>
-          <li><a href="https://www.instagram.com/spacex/" target="_blank">Instagram</a></li>
-          <li><a href="https://www.youtube.com/spacex" target="_blank">Youtube</a></li>
-          <li><a href="https://www.flickr.com/photos/spacex" target="_blank">Flickr</a></li>
-        </ul>
+        <div class="toCenter">
+          <ul class="menuResponsive">
+            <li><a href="#Home" title="Home Section">Home</a></li>
+            <li><a href="#Transports" title="Transports Section">Transports</a></li>
+            <li><a href="#BFR" title="BFR Section">BFR</a></li>
+            <li><a href="#Stats" title="Stats Section">Stats</a></li>
+          </ul>
+          <ul class="socialResponsive">
+            <li><a href="https://www.facebook.com/SpaceX" target="_blank">Facebook</a></li>
+            <li><a href="https://twitter.com/spacex" target="_blank">Twitter</a></li>
+            <li><a href="https://www.instagram.com/spacex/" target="_blank">Instagram</a></li>
+            <li><a href="https://www.youtube.com/spacex" target="_blank">Youtube</a></li>
+            <li><a href="https://www.flickr.com/photos/spacex" target="_blank">Flickr</a></li>
+          </ul>
+        </div>
       </section>
     </nav>
     <main>
       <section class="home">
-        <div class="mapContainer">
-          <div class="reset"><img src="images/reset.svg" alt="reset" class="reset"></div>
-          <img src="images/map.png" alt="world map" class="map" width="800" height="500">
-          <canvas class="map" width="800" height="500">
-          </canvas>
+        <div class="desktopHome">
+          <div class="mapContainer">
+            <div class="reset"><img src="images/reset.svg" alt="reset" class="reset"></div>
+            <img src="images/map.png" alt="world map" class="map" width="800" height="500">
+            <canvas class="map" width="800" height="500">
+            </canvas>
+          </div>
+          <div class="textBox mainText active">
+            <p class="instructions">Choose the place of <span class="pinkText">departure</span></p>
+            <button class="deadGradientButton">Let's Go</button>
+            <a class="buttonLink"><button class="gradientButton">Let's Go</button></a>
+          </div>
+          <div class="titleBox">
+            <p class="trip">Paris-New York</p>
+            <p class="distance">10000 km</p>
+          </div>
+          <div class="textBox newText">
+            <p class="instructions">What is <span class="pinkText">the fastest</span> way to <span class="pinkText">travel</span></p>
+            <a class="buttonLink"><button class="gradientButton active">Discover</button></a>
+          </div>
         </div>
-        <div class="textBox mainText active">
-          <p class="instructions">Choose the place of <span class="pinkText">departure</span></p>
-          <button class="deadGradientButton">Let's Go</button>
-          <a class="buttonLink"><button class="gradientButton">Let's Go</button></a>
-        </div>
-        <div class="titleBox">
-          <p class="trip">Paris-New York</p>
-          <p class="distance">10000 km</p>
-        </div>
-        <div class="textBox newText">
-          <p class="instructions">What is <span class="pinkText">the fastest</span> way to <span class="pinkText">travel</span></p>
-          <a class="buttonLink"><button class="gradientButton active">Discover</button></a>
+        <div class="mobileHome">
+          <form method="post" class="active">
+              <p class=title>Select your trip</p>
+            <div>
+              <label for="departure">Departure</label>
+              <select name="departure" id="departure">
+                <option value="0">New York</option>
+                <option value="4">Dakar</option>
+                <option value="1">Paris</option>
+                <option value="3">Moscow</option>
+                <option value="2">Shanghai</option>
+              </select>
+            </div>
+            <div>
+              <label for="arrival">Arrival</label>
+              <select name="arrival" id="arrival">
+                <option value="0">New York</option>
+                <option value="4">Dakar</option>
+                <option value="1">Paris</option>
+                <option value="3">Moscow</option>
+                <option value="2">Shanghai</option>
+              </select>
+            </div>
+            <input type="button" class="gradientButton active" value="Let's Go" id="validate">
+            <p class="error">This trip isn't possible</p>
+          </form>
+          <div class='newMobile'>
+            <p class="title pinkText">New York - Paris is 10000km.</p>
+            <p class="title"> What is the fastest way to get there?</p>
+            <a class="buttonLink"><button class="gradientButton active">Discover</button></a>
+            
+          </div>
         </div>
       </section>
-
       <section class="transports">
         <canvas class="background"></canvas>
         <div class="sliding">
@@ -356,7 +398,7 @@
       <section class="stats">
         <div class="line">
           <div class="price">
-            <h4>Prices ($)</h4>
+            <h4>Prices ($/km)</h4>
             <div class="jauges">
               <div class="verJauge">
                 <p class="transport">Horse</p>

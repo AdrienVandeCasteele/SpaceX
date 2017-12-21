@@ -1,0 +1,106 @@
+.load
+{
+    position:absolute;
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    background-color:$darkPurple;
+    z-index:300;
+    transition-delay:1.7s;
+    transition-duration:2s;
+    img
+    {
+      width:400px;
+      @media screen and (max-width:$break-large-2) {
+        width:350px;
+      }
+      @media screen and (max-width:$break-medium) {
+        width:250px;
+      }
+      @media screen and (max-width:$break-medium-2) {
+        width:220px;
+      }
+    }
+    .logoStart
+    {
+      position:absolute;
+      top:40%;
+      left:36%;
+      z-index:3;
+      animation-name : logoStart;
+      animation-duration:3s;
+      animation-fill-mode:forwards;
+      @media screen and (max-width:$break-large-2) {
+        left:30%;
+      }
+      @media screen and (max-width:$break-medium-2) {
+        left:25%;
+      }
+    }
+    .progressBar
+    {
+        position:absolute;
+        top:50%;
+        left:36%;
+        width:350px;
+        height:20px;
+        border:1px solid #fff;
+        animation-name : progressBar;
+        animation-duration:3s;
+        animation-fill-mode:both;
+        @media screen and (max-width:$break-large-2) {
+            left:30%;
+            width:300px;
+          }
+        @media screen and (max-width:$break-medium) {
+            top:47%;
+            left:27%;
+            width:270px;
+        }
+        @media screen and (max-width:$break-medium-2) {
+            left:24%;
+            width:200px;
+          }
+    }
+    
+    .seekBar
+    {
+        top:12%;
+        left:36%;
+        width:350px;
+        height:20px;
+        background:$pink-purple;
+        border:1px solid #fff;
+        animation-name : seekBar;
+        animation-duration:2s;
+        @media screen and (max-width:$break-large-2) {
+            width:300px;
+        }
+        @media screen and (max-width:$break-medium) {
+            width:270px;
+        }
+        @media screen and (max-width:$break-medium-2) {
+            width:200px;
+          }
+    }
+}
+
+
+@keyframes seekBar
+{
+    0%{opacity:0}
+    100%{opacity:1}
+}
+
+@keyframes progressBar
+{
+    0%{opacity:1}
+    100%{opacity:0}
+}
+
+@keyframes logoStart
+{
+    0%{opacity:1}
+    100%{opacity:0}
+}

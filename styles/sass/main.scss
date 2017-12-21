@@ -1,5 +1,6 @@
 @import "variables";
 @import "social";
+@import "onload";
 
 @import "nav";
 @import "mapSection";
@@ -26,7 +27,7 @@ body{
 }
 
 .pinkText{
-  color: $pink;
+  color: $pink !important;
 }
 
 h3{
@@ -56,7 +57,7 @@ h3{
   }
 }
 
-button.gradientButton{
+.gradientButton{
   padding: 5px 15px;
   height: 26px;
   background: $pink-purple;
@@ -71,11 +72,11 @@ button.gradientButton{
   cursor: pointer;
 }
 
-button.gradientButton.active:hover{
+.gradientButton.active:hover{
   transform: translateX(-50%) scale(1.2)
 }
 
-button.deadGradientButton{
+.deadGradientButton{
   padding: 5px 15px;
   height: 26px;
   background: $grey;
@@ -89,7 +90,7 @@ button.deadGradientButton{
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-button.gradientButton.active{
+.gradientButton.active{
   opacity: 1;
 }
 
@@ -110,6 +111,7 @@ div.info{
     font-size: 0;
 
     div.dot{
+      z-index: 200;
       position: relative;
       display: inline-block;
       height: 22px;
@@ -131,6 +133,7 @@ div.info{
     }
 
     p{
+      z-index: 100;
       display: inline-block;
       padding: 5px;
       margin-left: 10px;

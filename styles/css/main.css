@@ -73,6 +73,98 @@
 @media (max-width: 750px) {
   .share {
     display: none; } }
+.load {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #292136;
+  z-index: 300;
+  transition-delay: 1.7s;
+  transition-duration: 2s; }
+  .load img {
+    width: 400px; }
+    @media screen and (max-width: 960px) {
+      .load img {
+        width: 350px; } }
+    @media screen and (max-width: 700px) {
+      .load img {
+        width: 250px; } }
+    @media screen and (max-width: 480px) {
+      .load img {
+        width: 220px; } }
+  .load .logoStart {
+    position: absolute;
+    top: 40%;
+    left: 36%;
+    z-index: 3;
+    animation-name: logoStart;
+    animation-duration: 3s;
+    animation-fill-mode: forwards; }
+    @media screen and (max-width: 960px) {
+      .load .logoStart {
+        left: 30%; } }
+    @media screen and (max-width: 480px) {
+      .load .logoStart {
+        left: 25%; } }
+  .load .progressBar {
+    position: absolute;
+    top: 50%;
+    left: 36%;
+    width: 350px;
+    height: 20px;
+    border: 1px solid #fff;
+    animation-name: progressBar;
+    animation-duration: 3s;
+    animation-fill-mode: both; }
+    @media screen and (max-width: 960px) {
+      .load .progressBar {
+        left: 30%;
+        width: 300px; } }
+    @media screen and (max-width: 700px) {
+      .load .progressBar {
+        top: 47%;
+        left: 27%;
+        width: 270px; } }
+    @media screen and (max-width: 480px) {
+      .load .progressBar {
+        left: 24%;
+        width: 200px; } }
+  .load .seekBar {
+    top: 12%;
+    left: 36%;
+    width: 350px;
+    height: 20px;
+    background: linear-gradient(90deg, #F11B93 -2.63%, #BF0DD7 69.24%);
+    border: 1px solid #fff;
+    animation-name: seekBar;
+    animation-duration: 2s; }
+    @media screen and (max-width: 960px) {
+      .load .seekBar {
+        width: 300px; } }
+    @media screen and (max-width: 700px) {
+      .load .seekBar {
+        width: 270px; } }
+    @media screen and (max-width: 480px) {
+      .load .seekBar {
+        width: 200px; } }
+
+@keyframes seekBar {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+@keyframes progressBar {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+@keyframes logoStart {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
 nav {
   position: fixed;
   width: 100%;
@@ -81,7 +173,8 @@ nav {
     position: absolute;
     top: 28px;
     left: 30px;
-    height: 20px; }
+    height: 20px;
+    cursor: pointer; }
   nav ul.menuTop {
     position: absolute;
     top: 30px;
@@ -271,6 +364,79 @@ section.home {
       font-size: 18px;
       color: #f11b93; }
 
+div.desktopHome {
+  display: block; }
+
+div.mobileHome {
+  display: none;
+  padding-top: 50%; }
+  div.mobileHome form, div.mobileHome div.newMobile {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    width: 80%;
+    padding: 50px 0;
+    transform: translateY(-50%);
+    opacity: 0;
+    will-change: opacity;
+    transition: opacity 0.4s ease-out;
+    z-index: 1; }
+    div.mobileHome form p.title, div.mobileHome div.newMobile p.title {
+      font-family: "Roboto", sans-serif;
+      font-weight: 300;
+      font-size: 30px;
+      margin-bottom: 20px;
+      color: white; }
+    div.mobileHome form div, div.mobileHome div.newMobile div {
+      margin-top: 20px;
+      font-family: "Roboto", sans-serif;
+      font-weight: 300;
+      color: #f11b93; }
+      div.mobileHome form div label, div.mobileHome div.newMobile div label {
+        display: inline-block;
+        width: 100%;
+        padding: 6px;
+        color: white;
+        font-size: 14px; }
+      div.mobileHome form div select, div.mobileHome div.newMobile div select {
+        display: inline-block;
+        width: 100%;
+        height: 34px;
+        border-bottom: solid white 1px;
+        padding: 6px;
+        margin-top: 0px;
+        color: #f11b93;
+        font-size: 20px; }
+    div.mobileHome form .gradientButton, div.mobileHome div.newMobile .gradientButton {
+      height: 26px;
+      margin-top: 20px;
+      margin-left: 50%;
+      transform: translateX(-50%); }
+    div.mobileHome form p.error, div.mobileHome div.newMobile p.error {
+      position: absolute;
+      width: 100%;
+      top: 0px;
+      background: #f11b93;
+      padding: 5px;
+      color: white;
+      font-size: 14px;
+      font-family: "Roboto", sans-serif;
+      font-weight: bold;
+      will-change: opacity;
+      opacity: 0;
+      transition: opcacity 0.4s ease; }
+    div.mobileHome form p.error.active, div.mobileHome div.newMobile p.error.active {
+      opacity: 1; }
+  div.mobileHome form.active, div.mobileHome div.newMobile.active {
+    opacity: 1;
+    z-index: 10; }
+
+@media (max-width: 750px) {
+  div.mobileHome {
+    display: block; }
+
+  div.desktopHome {
+    display: none; } }
 section.transports {
   height: 100vh;
   background: linear-gradient(90deg, #3A0063 0.13%, #1B1464 99.86%);
@@ -752,7 +918,7 @@ body {
     transition: transform 0.6s ease-in-out; }
 
 .pinkText {
-  color: #f11b93; }
+  color: #f11b93 !important; }
 
 h3 {
   position: relative;
@@ -778,7 +944,7 @@ h3 {
     color: #1B1464;
     text-shadow: 4px 4px 8px rgba(227, 23, 168, 0.4); }
 
-button.gradientButton {
+.gradientButton {
   padding: 5px 15px;
   height: 26px;
   background: linear-gradient(90deg, #F11B93 -2.63%, #BF0DD7 69.24%);
@@ -792,10 +958,10 @@ button.gradientButton {
   transition: opacity 0.4s ease, transform 0.4s ease;
   cursor: pointer; }
 
-button.gradientButton.active:hover {
+.gradientButton.active:hover {
   transform: translateX(-50%) scale(1.2); }
 
-button.deadGradientButton {
+.deadGradientButton {
   padding: 5px 15px;
   height: 26px;
   background: #7d88a4;
@@ -808,7 +974,7 @@ button.deadGradientButton {
   will-change: opacity;
   transition: opacity 0.4s ease, transform 0.4s ease; }
 
-button.gradientButton.active {
+.gradientButton.active {
   opacity: 1; }
 
 div.info {
@@ -826,6 +992,7 @@ div.info {
     width: 250px;
     font-size: 0; }
     div.info div.infoDot div.dot {
+      z-index: 200;
       position: relative;
       display: inline-block;
       height: 22px;
@@ -843,6 +1010,7 @@ div.info {
         will-change: transform;
         transition: transform 0.4s ease; }
     div.info div.infoDot p {
+      z-index: 100;
       display: inline-block;
       padding: 5px;
       margin-left: 10px;
