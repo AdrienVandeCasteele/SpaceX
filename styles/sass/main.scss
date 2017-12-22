@@ -9,13 +9,11 @@
 @import "statsSection";
 
 body{
-  overflow: hidden;
   background: $darkPurple;
   font-family: 'Lato', sans-serif;
   color: $white;
 
   main{
-    position: fixed;
     z-index: 4;
     overflow: hidden;
     top: 0;
@@ -144,7 +142,7 @@ div.info{
       font-family: "Lato", sans-serif;
       color: white;
       opacity: 0;
-      transform: translateX(-10px);
+      transform: translateX(-50%);
       will-change: transform, opacity;
       transition: transform 0.4s ease, opacity 0.4s ease;
 

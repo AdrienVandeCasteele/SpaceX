@@ -81,7 +81,6 @@
   height: 100%;
   background-color: #292136;
   z-index: 300;
-  transition-delay: 1.7s;
   transition-duration: 2s; }
   .load img {
     width: 400px; }
@@ -930,12 +929,10 @@ section.stats {
       section.stats div.line jauges {
         height: 85%; } }
 body {
-  overflow: hidden;
   background: #292136;
   font-family: 'Lato', sans-serif;
   color: #fcfcfc; }
   body main {
-    position: fixed;
     z-index: 4;
     overflow: hidden;
     top: 0;
@@ -1048,7 +1045,7 @@ div.info {
       font-family: "Lato", sans-serif;
       color: white;
       opacity: 0;
-      transform: translateX(-10px);
+      transform: translateX(-50%);
       will-change: transform, opacity;
       transition: transform 0.4s ease, opacity 0.4s ease; }
   div.info div.infoDot:hover img.dot {

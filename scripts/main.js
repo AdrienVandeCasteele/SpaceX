@@ -3,7 +3,7 @@ const dataTransport = {
   horse: {
     speed : 15,
     cost: 0.08,
-    facts: ["horse can't swim", "horse are nice friends", "horse can die"],
+    facts: ["the horse is not everywhere. Indeed, it seems difficult to get a horse at any time", "The horse has no polluting character. As a result, riding on horseback will have no impact on the environment", "Unfortunately, the horse is not foolproof. We can note several elements such as fatigue or pain, which can stop the horse in his road"],
   },
   boat: {
     speed : 80,
@@ -23,7 +23,7 @@ const dataTransport = {
   plane: {
     speed : 980,
     cost: 0.18,
-    facts: ["The car offers great accessibility. As a result, it can be used all the time and in all circumstances", "The plane is a means of transport more and more used in the world.", "It is undoubtedly the most secure and controlled means of transport."]
+    facts: ["rejects an average of 360 grams of CO2 equivalent during a one-kilometer trip", "the plane is the fastest means of transport known today. It allows you to travel long distances fairly quickly", "It is undoubtedly the most secure and controlled means of transport."]
   },
   bfr: {
     speed : 16000,
@@ -161,7 +161,7 @@ let currentSection = 0
 
 // Switch to section
 
-const goToSection = (section)=>{
+const goToSection = (section, scroll)=>{
   if(activeDestinations.length<2){
     if(activeDestinations.length == 0){
       activeDestinations = [newYork, shanghai]
@@ -181,17 +181,39 @@ const goToSection = (section)=>{
     updateTransportSpeed(transportsParts[0])
   }
   currentSection = section
-  console.log(section)
-  $main.style.transform=`translateY(${-section*25}%)`
+  if(!scroll && !scrolling){
+    smoothScroll(window.pageYOffset, $sections[section].offsetTop)
+  }
+
   updateActiveSection(section)
   if(currentSection==3){
     updateStats()
+  } else if(currentSection==1){
+    updateTransportSpeed(currentTransport)
+  }
+}
+
+let scrolling = false
+
+const smoothScroll = (currentScroll, objective)=>{
+  if(currentScroll>objective+5 || currentScroll<objective-5){
+    scrolling = true
+    let step = 0.2*(objective-currentScroll)
+    scrollBy(0, step)
+    window.setTimeout(()=>{
+      smoothScroll(window.pageYOffset, objective)
+    },10)
+  } else{
+    window.setTimeout(()=>{
+      scrolling = false
+    },40)
   }
 }
 
 const updateActiveSection = (section)=>{
-  for(let i=0; i<$sections.length; i++){ $navParts[i].querySelector('.activeSection').classList.remove('active')
-                                       }
+  for(let i=0; i<$sections.length; i++){ 
+    $navParts[i].querySelector('.activeSection').classList.remove('active')
+  }
   $navParts[section].querySelector('.activeSection').classList.add('active')
 }
 
@@ -203,6 +225,20 @@ const menu = document.querySelector('#menuResponsive'),
 menuToggle.addEventListener('click', ()=>
                             {                            
   menu.classList.toggle('active')
+})
+
+// SCROLLING
+
+window.addEventListener('scroll', ()=>{
+  let scroll = true;
+  let offset = pageYOffset+$home.offsetHeight/2;
+  for (i=0; i<$sections.length; i++){
+    if(i<$sections.length-1 && offset>$sections[i].offsetTop && offset<$sections[i+1].offsetTop){
+      goToSection(i, scroll)
+    } else if(i==$sections.length-1 && offset>$sections[i].offsetTop){
+      goToSection(i, scroll)
+    }
+  }
 })
 
 // HOME RESPONSIVE
@@ -330,12 +366,10 @@ const displayTitle = (destination)=>{
 }
 
 const updateMouse = (e)=>{
-  console.log('helpme')
   for(destination of destinations){
     if((e.clientX-canvasCoords.left>=destination.x-10 && e.clientX-canvasCoords.left<=destination.x+10) &&
        (e.clientY-canvasCoords.top>=destination.y-10 && e.clientY-canvasCoords.top<=destination.y+10)){
       destination.hover = true
-      console.log('help')
     } else{
       destination.hover = false
     }
@@ -355,14 +389,10 @@ const activateDestination = (e)=>{
           activeDestinations.pop()
         }
         activeDestinations.push(destination)
-        console.log(activeDestinations)
       } else{
-        console.log("noui")
         for(let i=0; i<activeDestinations.length; i++){
-          console.log("coucou")
           if(!activeDestinations[i].selected){
             activeDestinations.splice(i, 1)
-            console.log(activeDestinations)
           }
         }
       }
@@ -576,7 +606,6 @@ for(let i=0; i<transportsParts.length; i++){
 let currentTransport = 0
 
 for(let i=0; i<$transportNavParts.length; i++){
-  console.log('for')
   if(i==0){
     $transportNavParts[i].addEventListener('click', ()=>{
       if(currentTransport>0){
@@ -595,7 +624,6 @@ for(let i=0; i<$transportNavParts.length; i++){
     })
 
   }else{
-    console.log(i)
     $transportNavParts[i].addEventListener('click', ()=>{
       goToTransport(i-1)
     })
@@ -613,7 +641,6 @@ const $mainInfos = $transports.querySelector('div.mainInfos'),
 let updatingTime = false
 
 const updateTransportTiming = (transport)=>{
-  console.log(updatingTime)
   if(!updatingTime){
     updatingTime=true
     const time = parseTime(getTime(transport))
@@ -694,7 +721,6 @@ const createParticle = ()=>{
     y: Math.random()*$backgroundCanvas.offsetHeight
   }
   particles.push(particle)
-
   window.setTimeout(createParticle, 200)
 }
 
@@ -757,8 +783,11 @@ window.addEventListener('resize', ()=>{
   }
 })
 
-
-
+/*
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+}
+*/
 
 
 

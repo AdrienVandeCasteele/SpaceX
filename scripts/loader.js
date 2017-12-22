@@ -4,4 +4,7 @@ const load = document.querySelector('.load'),
 window.onload = function(){
   load.style.zIndex = "1";  
   load.style.opacity="0";
+  window.setTimeout(()=>{
+    load.style.display="none"
+  }, 1500)
 };
