@@ -1,14 +1,4 @@
-// Logo START
-const load = document.querySelector('.load'),
-      logoStart = document.querySelector('.logoStart'),
-      progressBar = document.querySelector('.progressBar')
-window.onload = function(){
-  load.style.zIndex = "-1";  
-  load.style.opacity="0";
-};
-
-
-//DATA 
+// DATA 
 const dataTransport = {
   horse: {
     speed : 15,
@@ -76,7 +66,7 @@ const dataTravel = {
   },
 }
 
-// Math functions
+// MATH FUNCTIONS
 
 const getDistance = (departure, destination)=>{
   if(destination == paris){
@@ -105,7 +95,7 @@ const parseTime = (time)=>{
   return [Math.floor(days/10), days%10, Math.floor(hours/10), hours%10, Math.floor(minutes/10), minutes%10]
 }
 
-//Stats function
+// STATS FUNCTION
 
 const getSpeedStats = (transport)=>{
   let max = transport
@@ -137,7 +127,7 @@ const getTimeStats = (transport)=>{
   return getTime(transport)/getTime(max)*100
 }
 
-//NAV
+// NAVBAR
 
 const $main = document.querySelector("main"),
       $home = $main.querySelector("section.home"),
@@ -149,9 +139,39 @@ const $main = document.querySelector("main"),
       $navParts = Array.from($navBar.querySelectorAll('li')),
       $spaceLogo = $navBar.querySelector('img.logo')
 
+
+for(let i=0; i<$navParts.length; i++){
+  $navParts[i].addEventListener('click', ()=>{
+    if(i<4){
+      goToSection(i)
+    } else if(i<8){
+      goToSection(i-4)
+      menu.classList.toggle('active')
+    }
+  })
+}
+
+$spaceLogo.addEventListener('click', ()=>{
+  if(currentSection != 0){
+    goToSection(0)
+  }
+})
+
+let currentSection = 0
+
+// Switch to section
+
 const goToSection = (section)=>{
   if(activeDestinations.length<2){
-    activeDestinations = [newYork, shanghai]
+    if(activeDestinations.length == 0){
+      activeDestinations = [newYork, shanghai]
+    } else{
+      if(activeDestinations[0]!=shanghai){
+        activeDestinations.push(shanghai)
+      } else{
+        activeDestinations.push(newYork)
+      }
+    }
     displayEarth()
     startCanvas()
     updateNewText()
@@ -175,59 +195,7 @@ const updateActiveSection = (section)=>{
   $navParts[section].querySelector('.activeSection').classList.add('active')
 }
 
-for(let i=0; i<$navParts.length; i++){
-  $navParts[i].addEventListener('click', ()=>{
-    if(i<4){
-      goToSection(i)
-    } else if(i<8){
-      goToSection(i-4)
-      menu.classList.toggle('active')
-    }
-  })
-}
-
-$spaceLogo.addEventListener('click', ()=>{
-  if(currentSection != 0){
-    goToSection(0)
-  }
-})
-
-let currentSection = 0,
-    scrolled = false,
-    canScroll = false,
-    resetingScroll = false,
-    currentScroll = 500
-
-const resetScroll= ()=>{
-  resetingScroll = true
-  window.scrollTo(0, 500)
-  setTimeout(()=>{resetingScroll = false}, 10)
-}
-
-
-window.addEventListener('scroll', (e)=>{
-  e.preventDefault()
-  if(canScroll){
-    const offset = window.pageYOffset
-    let toTop = 0
-    if(offset>=currentScroll && currentSection<3){
-      toTop = 1
-    } else if(offset<=currentScroll && currentSection>0){
-      toTop = -1
-    }
-    if(!scrolled){
-      scrolled = true
-      console.log('ça scroll')
-      goToSection(currentSection+toTop)
-      window.setTimeout(()=>{
-        scrolled = false
-      }, 1500)
-    }
-    resetScroll()
-  }
-})
-
-// MENU RESPONSIVE
+// NAVBAR RESPONSIVE
 const menu = document.querySelector('#menuResponsive'),
       menuHamburger = document.querySelector('.menu-hamburger'),
       menuToggle = document.querySelector('.menu-toggle')
@@ -261,7 +229,7 @@ $newMobileButton.addEventListener('click', ()=>{
   goToTransport(0)
 })
 
-// CANVAS
+// HOME
 
 //background
 const map = $home.querySelector("canvas.map"),
@@ -362,10 +330,12 @@ const displayTitle = (destination)=>{
 }
 
 const updateMouse = (e)=>{
+  console.log('helpme')
   for(destination of destinations){
     if((e.clientX-canvasCoords.left>=destination.x-10 && e.clientX-canvasCoords.left<=destination.x+10) &&
        (e.clientY-canvasCoords.top>=destination.y-10 && e.clientY-canvasCoords.top<=destination.y+10)){
       destination.hover = true
+      console.log('help')
     } else{
       destination.hover = false
     }
@@ -439,15 +409,13 @@ map.addEventListener('mousemove', updateMouse)
 map.addEventListener('click', activateDestination)
 tick()
 
-// DOM
+// HOME DOM
 
 const $textBox = $home.querySelector('div.mainText'),
       $instructions = $textBox.querySelector('p.instructions'),
       $instructionsButton = $textBox.querySelector('.gradientButton'),
-      InstructionLink = $textBox.querySelector('.buttonLink'),
       $newTextBox = $home.querySelector('.newText'),
       $newTextButton = $newTextBox.querySelector('.gradientButton'),
-      $newTextLink = $newTextBox.querySelector('.buttonLink'),
       $titleBox = $home.querySelector('div.titleBox'),
       $titleTrip = $titleBox.querySelector('p.trip'),
       $titleDistance = $titleBox.querySelector('p.distance'),
@@ -487,7 +455,7 @@ const updateButton = (button)=>{
 
 // BUTTON HANDLER
 
-InstructionLink.addEventListener('click', (e)=>{
+$instructionsButton.addEventListener('click', (e)=>{
   if(status==2){
     e.preventDefault()
     displayEarth()
@@ -502,6 +470,11 @@ InstructionLink.addEventListener('click', (e)=>{
 
 
 $reset.addEventListener('click', ()=>{
+  if(status == 0){
+    activeDestinations= []
+  } else if(status == 1){
+    activeDestinations.pop()
+  }
   displayEarth()
   stopCanvas()
   changeMainText()
@@ -547,7 +520,7 @@ const changeMainText = ()=>{
   $titleBox.classList.toggle('active')
 }
 
-$newTextLink.addEventListener('click', (e)=>{
+$newTextButton.addEventListener('click', (e)=>{
   e.preventDefault()
   goToSection(1)
   goToTransport(0)
@@ -561,7 +534,28 @@ $newTextLink.addEventListener('click', (e)=>{
 const $transportNav = $transports.querySelector('nav'),
       $transportNavParts = Array.from($transportNav.querySelectorAll('li')),
       transportsParts = [dataTransport.horse, dataTransport.boat, dataTransport.car, dataTransport.train, dataTransport.plane, dataTransport.bfr],
+      $pinkArrow = $transportNavParts[7].querySelector('img.pinkArrow'),
       $sliding = $transports.querySelector('.sliding')
+
+const goToTransport = (index)=>{
+  currentTransport=index
+  $sliding.style.transform=`translateX(${-index*100/6}%)`
+  updateActiveTransport(index+1)
+  updateTransportTiming(transportsParts[index])
+  updateTransportSpeed(transportsParts[index])
+  if(index == 5){
+    $pinkArrow.classList.add("active")
+  } else{
+    $pinkArrow.classList.remove("active")
+  }
+}
+
+const updateActiveTransport = (index)=>{
+  for(let i=0; i<$transportNavParts.length; i++){
+    $transportNavParts[i].classList.remove("active")
+  }
+  $transportNavParts[index].classList.add("active")
+}
 
 // init Transport functions
 
@@ -606,21 +600,6 @@ for(let i=0; i<$transportNavParts.length; i++){
       goToTransport(i-1)
     })
   }
-}
-
-const goToTransport = (index)=>{
-  currentTransport=index
-  $sliding.style.transform=`translateX(${-index*100/6}%)`
-  updateActiveTransport(index+1)
-  updateTransportTiming(transportsParts[index])
-  updateTransportSpeed(transportsParts[index])
-}
-
-const updateActiveTransport = (index)=>{
-  for(let i=0; i<$transportNavParts.length; i++){
-    $transportNavParts[i].classList.remove("active")
-  }
-  $transportNavParts[index].classList.add("active")
 }
 
 //update transport Infos
@@ -671,7 +650,7 @@ const updateTransportSpeed = (transport)=>{
   $speedJauge.style.transform= `translateY(${-ratio}%)`
 }
 
-// transport background
+// transport background canvas
 
 const $backgroundCanvas = $transports.querySelector('canvas.background'),
       backgroundContext = $backgroundCanvas.getContext('2d')
@@ -729,7 +708,7 @@ const $bfrButton = $bfr.querySelector('.gradientButton')
 
 $bfrButton.addEventListener('click', ()=>{goToSection(3)})
 
-// UPDATE STATS
+// STATS SECTION
 
 const $priceStatsJauges = Array.from($stats.querySelectorAll('.price .fillJauge')),
       $priceStatsValues = Array.from($stats.querySelectorAll('.price .value')),

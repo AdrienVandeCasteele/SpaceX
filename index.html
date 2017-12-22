@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <title>Why BFR ?</title>
-
     <meta property="og:title" content="A short story of transportation from the horse to the BFR" />
     <meta property="og:url" content="https://adrienvandecasteele.github.io/SpaceX/" />
-    <meta property="og:image" content="https://adrienvandecasteele.github.io/SpaceX/images/ogImage.png" />
-
+    <meta property="og:image" content="/images/ogImage.png" />
     <link rel="apple-touch-icon" sizes="57x57" href="images/favicons/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="images/favicons/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="images/favicons/apple-icon-72x72.png">
@@ -26,21 +24,22 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="images/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-
-
     <link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="styles/reset.css">
     <link rel="stylesheet" type="text/css" href="styles/css/main.css">
   </head>
   <body>
+    <!-- LOADER -->
     <div class="load"> 
-      <img src="images/whitelogo.png" alt="logo" class="logoStart" />
+      <img src="images/whitelogo.svg" alt="logo" class="logoStart" />
       <div class="progressBar">
         <div class="seekBar"></div>
       </div>
     </div>
+    <script src="scripts/loader.js"></script>
+    <!-- NAVBAR -->
     <nav class="navBar">
-      <img class="logo" alt="SpaceX Logo" src="images/whiteLogo.png">
+      <img class="logo" alt="SpaceX Logo" src="images/whiteLogo.svg">
       <ul class="menuTop">
         <li><a href="#Home" title="Home Section">Home</a><div class="activeSection active"></div></li>
         <li><a href="#Transports" title="Transports Section">Transports</a><div class="activeSection"></div></li>
@@ -71,6 +70,7 @@
       </section>
     </nav>
     <main>
+      <!-- HOME -->
       <section class="home">
         <div class="desktopHome">
           <div class="mapContainer">
@@ -82,7 +82,7 @@
           <div class="textBox mainText active">
             <p class="instructions">Choose the place of <span class="pinkText">departure</span></p>
             <button class="deadGradientButton">Let's Go</button>
-            <a class="buttonLink"><button class="gradientButton">Let's Go</button></a>
+            <button class="gradientButton">Let's Go</button>
           </div>
           <div class="titleBox">
             <p class="trip">Paris-New York</p>
@@ -90,12 +90,12 @@
           </div>
           <div class="textBox newText">
             <p class="instructions">What is <span class="pinkText">the fastest</span> way to <span class="pinkText">travel</span></p>
-            <a class="buttonLink"><button class="gradientButton active">Discover</button></a>
+            <button class="gradientButton active">Discover</button>
           </div>
         </div>
         <div class="mobileHome">
           <form method="post" class="active">
-              <p class=title>Select your trip</p>
+            <p class=title>Select your trip</p>
             <div>
               <label for="departure">Departure</label>
               <select name="departure" id="departure">
@@ -122,11 +122,11 @@
           <div class='newMobile'>
             <p class="title pinkText">New York - Paris is 10000km.</p>
             <p class="title"> What is the fastest way to get there?</p>
-            <a class="buttonLink"><button class="gradientButton active">Discover</button></a>
-            
+            <button class="gradientButton active">Discover</button>
           </div>
         </div>
       </section>
+      <!-- TRANSPORTS -->
       <section class="transports">
         <canvas class="background"></canvas>
         <div class="sliding">
@@ -298,7 +298,6 @@
             </div>
             <h3>BFR<span class="lueur">BFR</span></h3>
           </div>
-
         </div>
         <div class="speedJauge">
           <p>Speed</p>
@@ -320,17 +319,18 @@
           <nav class="transportNav">
             <ul>
               <li><a href="#" title="Previous Transport"><img class="leftArrow" src="images/arrow.svg" alt="Go Left"></a></li>
-              <li class="active"><a href="#" title="Horse"><span class="dot"><span class="activeTransport"></span></span></a></li>
-              <li><a href="#" title="Boat"><span class="dot"><span class="activeTransport"></span></span></a></li>
-              <li><a href="#" title="Car"><span class="dot"><span class="activeTransport"></span></span></a></li>
-              <li><a href="#" title="Train"><span class="dot"><span class="activeTransport"></span></span></a></li>
-              <li><a href="#" title="Plane"><span class="dot"><span class="activeTransport"></span></span></a></li>
-              <li><a href="#" title="BFR"><span class="dot"><span class="activeTransport"></span></span></a></li>
-              <li><a href="#" title="Next Transport"><img class="rightArrow"  src="images/arrow.svg" alt="Go Right"></a></li>
+              <li class="active"><a href="#" title="Horse"><span class="dot"><span class="activeTransport"></span></span><p>Horse</p></a></li>
+              <li><a href="#" title="Boat"><span class="dot"><span class="activeTransport"></span></span><p>Boat</p></a></li>
+              <li><a href="#" title="Car"><span class="dot"><span class="activeTransport"></span></span><p>Car</p></a></li>
+              <li><a href="#" title="Train"><span class="dot"><span class="activeTransport"></span></span><p>Train</p></a></li>
+              <li><a href="#" title="Plane"><span class="dot"><span class="activeTransport"></span></span><p>Plane</p></a></li>
+              <li><a href="#" title="BFR"><span class="dot"><span class="activeTransport"></span></span><p>BFR</p></a></li>
+              <li><a href="#" title="Next Transport"><img class="rightArrow"  src="images/arrow.svg" alt="Go Right"><img class="pinkArrow"  src="images/Pinkarrow.svg" alt="Learn More"></a></li>
             </ul>
           </nav>
         </div>
       </section>
+      <!-- BFR -->
       <section class="bfrPage">
         <h3>BFR<span class="lueur">BFR</span></h3>
         <div class="bfrIllustration">
@@ -390,11 +390,10 @@
               <p>the BFR tickets will cost more or less the price of a plane ticket</p>
             </div>
           </div>
-          <a class="buttonLink" href="#">
-            <button class="gradientButton active">Still not convinced ?</button>
-          </a>
+          <button class="gradientButton active">Still not convinced ?</button>
         </div>
       </section>
+      <!-- STATS -->
       <section class="stats">
         <div class="line">
           <div class="price">
@@ -549,11 +548,10 @@
                 </div>
               </div>
             </div>
-          </div>
+            </section>
+          </main>
         </div>
-      </section>
-    </main>
-
+      </div>
     <!-- SOCIAL -->
     <div class="share">
       <img src="images/social/socialShare.png" alt="social button" class="socialShare trigger icon">
@@ -563,8 +561,6 @@
       <a href="https://www.youtube.com/spacex" target="_blank" title="Youtube"><img src="images/social/youtube.png" alt="youtube" class="socialShare icon youtube"></a>
       <a href="https://www.flickr.com/photos/spacex" target="_blank" title="Flickr"><img src="images/social/flick.png" alt="flickr" class="socialShare icon flickr"></a> 
     </div>
-
-
     <script src="scripts/main.js"></script>
   </body>
 </html>

@@ -1,9 +1,9 @@
 section.stats{
-  height: 100vh;
   background: $purple-blue;
   position: relative;
   overflow: hidden;
   font-size: 0;
+  height: 100vh;
 
   div.line{
     display: flex;
@@ -160,6 +160,7 @@ section.stats{
 @media (max-width: $break-large-3){
   section.stats{
     overflow-y: scroll;
+    height: auto;
     
     div.line{
       display: block;

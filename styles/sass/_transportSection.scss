@@ -55,7 +55,6 @@ div.transport{
       img.pic{
         display: inline-block;
         width: 100%;
-        max-height: 350px;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -160,7 +159,8 @@ div.mainInfos{
       }
 
       span.unit{
-        font-size: 18px;
+        color: $pink;
+        font-size: 22px;
       }
     }
   }
@@ -193,6 +193,7 @@ div.mainInfos{
       box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.3);
 
       li{
+        position: relative;
         margin: 0;
         padding: 0;
         height: 20px;
@@ -228,9 +229,24 @@ div.mainInfos{
             transform: scale(1);
           }
         }
+        
+        p{
+          position: absolute;
+          display: inline-block;
+          top: 25px;
+          left: 10px;
+          transform: translateX(-50%);
+          font-size: 16px;
+          padding-top: 0;
+          color: white;
+          font-family: "Lato", sans-serif;
+          opacity: 0;
+          will-change: opacity;
+          transition: opacity 0.4s ease-out;
+        }
 
         img{
-          position: relative;
+          position: absolute;
           display: inline-block;
           height: 20px;
           width: 20px;
@@ -239,10 +255,24 @@ div.mainInfos{
         img.leftArrow{
           transform: scaleX(-1);
         }
+        
+        img.pinkArrow{
+          opacity: 0;
+          will-change: opacity;
+          transition: opacity 0.4s ease-out;
+        }
+        
+        img.pinkArrow.active{
+          opacity: 1;
+        }
       }
       li.active{
         span.dot span.activeTransport{
           transform: scale(1);
+        }
+        
+        p{
+          opacity: 1;
         }
       }
     }
@@ -255,6 +285,10 @@ div.mainInfos{
     display: none;
   }
   div.mainInfos nav.transportNav ul{
+    width: 90%;
+  }
+  
+  div.transport div.scene div.transportPic{
     width: 90%;
   }
 
@@ -280,7 +314,7 @@ div.mainInfos{
       }
 
       span.unit{
-        font-size: 14px;
+        font-size: 12px;
       }
     }
   }
