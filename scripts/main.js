@@ -716,11 +716,13 @@ const moveParticle = ()=>{
 }
 
 const createParticle = ()=>{
-  const particle = {
-    x: $backgroundCanvas.offsetWidth,
-    y: Math.random()*$backgroundCanvas.offsetHeight
+  if(particles.length<170){
+    const particle = {
+      x: $backgroundCanvas.offsetWidth,
+      y: Math.random()*$backgroundCanvas.offsetHeight
+    }
+    particles.push(particle)
   }
-  particles.push(particle)
   window.setTimeout(createParticle, 200)
 }
 
@@ -783,11 +785,10 @@ window.addEventListener('resize', ()=>{
   }
 })
 
-/*
 window.onbeforeunload = function () {
   window.scrollTo(0, 0);
 }
-*/
+
 
 
 

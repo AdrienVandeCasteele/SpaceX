@@ -82,31 +82,6 @@
   background-color: #292136;
   z-index: 300;
   transition-duration: 2s; }
-  .load img {
-    width: 400px; }
-    @media screen and (max-width: 960px) {
-      .load img {
-        width: 350px; } }
-    @media screen and (max-width: 700px) {
-      .load img {
-        width: 250px; } }
-    @media screen and (max-width: 480px) {
-      .load img {
-        width: 220px; } }
-  .load .logoStart {
-    position: absolute;
-    top: 40%;
-    left: 36%;
-    z-index: 3;
-    animation-name: logoStart;
-    animation-duration: 3s;
-    animation-fill-mode: forwards; }
-    @media screen and (max-width: 960px) {
-      .load .logoStart {
-        left: 30%; } }
-    @media screen and (max-width: 480px) {
-      .load .logoStart {
-        left: 25%; } }
   .load .progressBar {
     position: absolute;
     top: 50%;
